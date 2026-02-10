@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+build
+next-env.d.ts
+
+# Allow dynamic styles in specific components
+# components/market/StockHeatmap.tsx
+# components/TradingViewWidget.tsx

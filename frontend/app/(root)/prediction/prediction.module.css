@@ -1,0 +1,1119 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: white;
+  padding-bottom: 3rem;
+  position: relative;
+}
+
+.backgroundDecorative {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.decorativeBlob1 {
+  position: absolute;
+  top: 5rem;
+  right: 2.5rem;
+  width: 18rem;
+  height: 18rem;
+  background-color: rgb(34, 211, 238);
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  filter: blur(3rem);
+  opacity: 0.05;
+}
+
+.decorativeBlob2 {
+  position: absolute;
+  bottom: 5rem;
+  left: 2.5rem;
+  width: 18rem;
+  height: 18rem;
+  background-color: rgb(34, 211, 238);
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  filter: blur(3rem);
+  opacity: 0.05;
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  container: container / inline-size;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  max-width: 100%;
+}
+
+@container (min-width: 80rem) {
+  .content {
+    max-width: 100%;
+    padding: 2rem 1rem;
+  }
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.mainTitle {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.subtitle {
+  color: rgb(148, 163, 184);
+  font-size: 1rem;
+  line-height: 1.75rem;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@container (min-width: 1024px) {
+  .gridContainer {
+    grid-template-columns: 1fr 3fr;
+  }
+}
+
+.sidebar {
+  @container (min-width: 1024px) {
+    position: relative;
+  }
+}
+
+.sidebarCard {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  padding: 1.5rem;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  @container (min-width: 1024px) {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+.sidebarCard:hover {
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.1);
+}
+
+.sidebarTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.searchInput::placeholder {
+  color: rgb(148, 163, 184);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1);
+}
+
+.stockList {
+  max-height: 24rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stockList::-webkit-scrollbar {
+  width: 0.375rem;
+}
+
+.stockList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.stockList::-webkit-scrollbar-thumb {
+  background: rgba(75, 85, 99, 0.5);
+  border-radius: 0.25rem;
+}
+
+.stockButton {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(75, 85, 99, 0.3);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.stockButton:hover {
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 4px 16px rgba(34, 211, 238, 0.1);
+  background-color: rgba(30, 41, 59, 0.9);
+}
+
+.stockButtonActive {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.3) 0%, rgba(34, 211, 238, 0.1) 100%);
+  border: 1px solid rgba(34, 211, 238, 0.5);
+  box-shadow: 0 4px 16px rgba(34, 211, 238, 0.2);
+}
+
+.stockInfo {
+  flex: 1;
+}
+
+.stockSymbol {
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.stockName {
+  font-size: 0.75rem;
+  color: rgb(148, 163, 184);
+  margin: 0;
+}
+
+.stockPrice {
+  text-align: right;
+}
+
+.price {
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.change {
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.changePositive {
+  color: rgb(34, 197, 94);
+}
+
+.changeNegative {
+  color: rgb(239, 68, 68);
+}
+
+.daysSelector {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(75, 85, 99, 0.3);
+}
+
+.daysLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+}
+
+.rangeInput {
+  width: 100%;
+  height: 0.5rem;
+  background-color: rgba(75, 85, 99, 0.5);
+  border-radius: 0.375rem;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.rangeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 0.5rem rgba(34, 211, 238, 0.5);
+  border: 2px solid rgba(30, 41, 59, 0.8);
+}
+
+.rangeInput::-moz-range-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid rgba(30, 41, 59, 0.8);
+  box-shadow: 0 0 0.5rem rgba(34, 211, 238, 0.5);
+}
+
+.daysRange {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.daysRange span {
+  font-size: 0.875rem;
+  color: rgb(148, 163, 184);
+}
+
+.daysValue {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: rgb(34, 211, 238);
+}
+
+.predictButton {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+  color: #0f172a;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(34, 211, 238, 0.3);
+}
+
+.predictButton:hover:not(:disabled) {
+  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.4);
+  transform: translateY(-2px);
+}
+
+.predictButtonDisabled {
+  background: linear-gradient(135deg, rgba(75, 85, 99, 0.8), rgba(75, 85, 99, 0.6));
+  color: rgb(148, 163, 184);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.progressContainer {
+  margin-top: 1rem;
+}
+
+.progressBar {
+  width: 100%;
+  background-color: rgba(75, 85, 99, 0.3);
+  border-radius: 9999px;
+  height: 0.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(75, 85, 99, 0.5);
+}
+
+.progressFill {
+  background: linear-gradient(90deg, #22d3ee 0%, #06b6d4 100%);
+  height: 100%;
+  transition: width 0.3s;
+}
+
+.progressText {
+  font-size: 0.75rem;
+  color: rgb(148, 163, 184);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.errorMessage {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 0.5rem;
+}
+
+.errorMessage p {
+  font-size: 0.875rem;
+  color: rgb(254, 202, 202);
+  margin: 0;
+}
+
+.mainContent {
+  width: 100%;
+}
+
+.resultsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@container (min-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 1024px) {
+  .statsGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.statCard {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+
+.statCard:hover {
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 4px 16px rgba(34, 211, 238, 0.1);
+}
+
+.statLabel {
+  color: rgb(148, 163, 184);
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  margin-top: 0;
+}
+
+.statValue {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.statValueBlue {
+  color: rgb(34, 211, 238);
+}
+
+.statValueGreen {
+  color: rgb(34, 211, 238);
+}
+
+.statValueOrange {
+  color: rgb(34, 211, 238);
+}
+
+.trendCard {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.trendCard:hover {
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.1);
+}
+
+.trendHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.trendHeader h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.trendBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid;
+}
+
+.trendBadgeUp {
+  background-color: rgba(34, 211, 238, 0.1);
+  border-color: rgba(34, 211, 238, 0.3);
+  color: rgb(165, 243, 252);
+}
+
+.trendBadgeDown {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: rgb(254, 202, 202);
+}
+
+.detailsCard {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.detailsCard:hover {
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.1);
+}
+
+.detailsCard h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 1rem 0;
+}
+
+.predictionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@container (min-width: 768px) {
+  .predictionGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.predictionItem {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.6) 100%);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(75, 85, 99, 0.3);
+  padding: 0.75rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.predictionItem:hover {
+  border-color: rgba(34, 211, 238, 0.5);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+  box-shadow: 0 4px 12px rgba(34, 211, 238, 0.1);
+}
+
+.predictionDay {
+  font-size: 0.75rem;
+  color: rgb(148, 163, 184);
+  margin: 0 0 0.25rem 0;
+}
+
+.predictionPrice {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgb(34, 211, 238);
+  margin: 0;
+}
+
+.predictionChange {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+.predictionChangePositive {
+  color: rgb(165, 243, 252);
+}
+
+.predictionChangeNegative {
+  color: rgb(254, 202, 202);
+}
+
+.emptyState {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  padding: 3rem;
+  text-align: center;
+}
+
+.emptyState h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgb(203, 213, 225);
+  margin: 1rem 0 0.5rem 0;
+}
+
+.emptyState p {
+  color: rgb(148, 163, 184);
+  margin: 0;
+}
+
+.loadingState {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  padding: 3rem;
+  text-align: center;
+}
+
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.loadingState h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgb(203, 213, 225);
+  margin: 0 0 0.5rem 0;
+}
+
+.loadingState p {
+  color: rgb(148, 163, 184);
+  margin: 0.5rem 0;
+}
+
+.loadingSubtext {
+  font-size: 0.875rem;
+  color: rgb(148, 163, 184) !important;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@container (min-width: 1024px) {
+  .gridContainer {
+    grid-template-columns: 1fr 3fr;
+  }
+}
+
+.sidebar {
+  @container (min-width: 1024px) {
+    position: relative;
+  }
+}
+
+.sidebarCard {
+  background: linear-gradient(to bottom right, rgb(30, 41, 59), rgb(15, 23, 42));
+  border-radius: 1rem;
+  border: 1px solid rgb(71, 85, 105);
+  padding: 1.5rem;
+  @container (min-width: 1024px) {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+.sidebarTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: rgb(55, 65, 81);
+  border: 1px solid rgb(71, 85, 105);
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+}
+
+.searchInput::placeholder {
+  color: rgb(107, 114, 128);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: rgb(59, 130, 246);
+}
+
+.stockList {
+  max-height: 24rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stockList::-webkit-scrollbar {
+  width: 0.375rem;
+}
+
+.stockList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.stockList::-webkit-scrollbar-thumb {
+  background: rgb(71, 85, 105);
+  border-radius: 0.25rem;
+}
+
+.stockButton {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(71, 85, 105);
+  background-color: rgb(55, 65, 81);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.stockButton:hover {
+  background-color: rgb(51, 65, 85);
+}
+
+.stockButtonActive {
+  background: linear-gradient(to right, rgb(37, 99, 235), rgb(147, 51, 234));
+  border: 1px solid rgb(96, 165, 250);
+}
+
+.stockInfo {
+  flex: 1;
+}
+
+.stockSymbol {
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.stockName {
+  font-size: 0.75rem;
+  color: rgb(107, 114, 128);
+  margin: 0;
+}
+
+.stockPrice {
+  text-align: right;
+}
+
+.price {
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.change {
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.changePositive {
+  color: rgb(74, 222, 128);
+}
+
+.changeNegative {
+  color: rgb(248, 113, 113);
+}
+
+.daysSelector {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgb(71, 85, 105);
+}
+
+.daysLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+}
+
+.rangeInput {
+  width: 100%;
+  height: 0.5rem;
+  background-color: rgb(55, 65, 81);
+  border-radius: 0.375rem;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.rangeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: linear-gradient(to right, rgb(59, 130, 246), rgb(147, 51, 234));
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 0.5rem rgba(59, 130, 246, 0.5);
+}
+
+.rangeInput::-moz-range-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  background: linear-gradient(to right, rgb(59, 130, 246), rgb(147, 51, 234));
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 0.5rem rgba(59, 130, 246, 0.5);
+}
+
+.daysRange {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.daysRange span {
+  font-size: 0.875rem;
+  color: rgb(107, 114, 128);
+}
+
+.daysValue {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: rgb(59, 130, 246);
+}
+
+.predictButton {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(to right, rgb(37, 99, 235), rgb(147, 51, 234));
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.3);
+}
+
+.predictButton:hover:not(:disabled) {
+  background: linear-gradient(to right, rgb(29, 78, 216), rgb(126, 34, 206));
+}
+
+.predictButtonDisabled {
+  background-color: rgb(75, 85, 99);
+  color: rgb(107, 114, 128);
+  cursor: not-allowed;
+}
+
+.progressContainer {
+  margin-top: 1rem;
+}
+
+.progressBar {
+  width: 100%;
+  background-color: rgb(55, 65, 81);
+  border-radius: 9999px;
+  height: 0.5rem;
+  overflow: hidden;
+}
+
+.progressFill {
+  background: linear-gradient(to right, rgb(59, 130, 246), rgb(147, 51, 234));
+  height: 100%;
+  transition: width 0.3s;
+  animation: progress 2s infinite;
+}
+
+@keyframes progress {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.progressText {
+  font-size: 0.75rem;
+  color: rgb(107, 114, 128);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.errorMessage {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: rgba(127, 29, 29, 0.3);
+  border: 1px solid rgb(153, 27, 27);
+  border-radius: 0.5rem;
+}
+
+.errorMessage p {
+  font-size: 0.875rem;
+  color: rgb(254, 202, 202);
+  margin: 0;
+}
+
+.mainContent {
+  width: 100%;
+}
+
+.resultsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@container (min-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 1024px) {
+  .statsGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.statCard {
+  background: linear-gradient(to bottom right, rgb(30, 41, 59), rgb(15, 23, 42));
+  border-radius: 0.75rem;
+  border: 1px solid rgb(71, 85, 105);
+  padding: 1rem;
+}
+
+.statLabel {
+  color: rgb(107, 114, 128);
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  margin-top: 0;
+}
+
+.statValue {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.statValueBlue {
+  color: rgb(34, 211, 238);
+}
+
+.statValueGreen {
+  color: rgb(34, 211, 238);
+}
+
+.statValueOrange {
+  color: rgb(34, 211, 238);
+}
+
+.trendCard {
+  background: linear-gradient(to bottom right, rgb(30, 41, 59), rgb(15, 23, 42));
+  border-radius: 0.75rem;
+  border: 1px solid rgb(71, 85, 105);
+  padding: 1.5rem;
+}
+
+.trendHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.trendHeader h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.trendBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid;
+}
+
+.trendBadgeUp {
+  background-color: rgba(34, 211, 238, 0.3);
+  border-color: rgb(34, 211, 238);
+  color: rgb(165, 243, 252);
+}
+
+.trendBadgeDown {
+  background-color: rgba(239, 68, 68, 0.3);
+  border-color: rgb(239, 68, 68);
+  color: rgb(248, 113, 113);
+}
+
+.detailsCard {
+  background: linear-gradient(to bottom right, rgb(30, 41, 59), rgb(15, 23, 42));
+  border-radius: 0.75rem;
+  border: 1px solid rgb(71, 85, 105);
+  padding: 1.5rem;
+}
+
+.detailsCard h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 1rem 0;
+}
+
+.predictionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@container (min-width: 768px) {
+  .predictionGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.predictionItem {
+  background-color: rgba(55, 65, 81, 0.5);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.predictionItem:hover {
+  background-color: rgb(55, 65, 81);
+}
+
+.predictionDay {
+  font-size: 0.75rem;
+  color: rgb(107, 114, 128);
+  margin: 0 0 0.25rem 0;
+}
+
+.predictionPrice {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgb(96, 165, 250);
+  margin: 0;
+}
+
+.predictionChange {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+.predictionChangePositive {
+  color: rgb(165, 243, 252);
+}
+
+.predictionChangeNegative {
+  color: rgb(248, 113, 113);
+}
+
+.emptyState {
+  background: linear-gradient(to bottom right, rgb(30, 41, 59), rgb(15, 23, 42));
+  border-radius: 1rem;
+  border: 1px solid rgb(71, 85, 105);
+  padding: 3rem;
+  text-align: center;
+}
+
+.emptyState h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: rgb(209, 213, 219);
+  margin: 1rem 0 0.5rem 0;
+}
+
+.emptyState p {
+  color: rgb(107, 114, 128);
+  margin: 0;
+}
+
+.loadingState {
+  background: linear-gradient(to bottom right, rgb(30, 41, 59), rgb(15, 23, 42));
+  border-radius: 1rem;
+  border: 1px solid rgb(71, 85, 105);
+  padding: 3rem;
+  text-align: center;
+}
+
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.loadingState h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: rgb(209, 213, 219);
+  margin: 0 0 0.5rem 0;
+}
+
+.loadingState p {
+  color: rgb(107, 114, 128);
+  margin: 0.5rem 0;
+}
+
+.loadingSubtext {
+  font-size: 0.875rem;
+  color: rgb(107, 114, 128) !important;
+}

@@ -1,0 +1,19 @@
+{
+  "company": "aptv",
+  "lookback_period": "10mo",
+  "training_date": "20251215_204029",
+  "best_hyperparameters": {
+    "slicing_window": 36,
+    "LSTM_units": 32,
+    "dropout_rate": 0.12275080655523474,
+    "epochs": 80
+  },
+  "final_training_loss": 0.14109791815280914,
+  "final_validation_loss": 0.2968989610671997,
+  "slicing_window": 36,
+  "model_architecture": {
+    "LSTM_units": 32,
+    "dropout_rate": 0.12275080655523474,
+    "learning_rate": 0.001
+  }
+}

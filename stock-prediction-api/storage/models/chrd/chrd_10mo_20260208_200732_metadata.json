@@ -1,0 +1,19 @@
+{
+  "company": "chrd",
+  "lookback_period": "10mo",
+  "training_date": "20260208_200732",
+  "best_hyperparameters": {
+    "slicing_window": 22,
+    "LSTM_units": 96,
+    "dropout_rate": 0.19086219675548638,
+    "epochs": 80
+  },
+  "final_training_loss": 0.26113829016685486,
+  "final_validation_loss": 0.2478833943605423,
+  "slicing_window": 22,
+  "model_architecture": {
+    "LSTM_units": 96,
+    "dropout_rate": 0.19086219675548638,
+    "learning_rate": 0.001
+  }
+}

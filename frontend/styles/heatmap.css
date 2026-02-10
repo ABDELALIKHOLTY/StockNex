@@ -1,0 +1,98 @@
+.heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 2px;
+    background-color: #1a1a1a;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.heatmap-grid-large {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 3px;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 4px;
+}
+
+.heatmap-cell {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 8px;
+    border-radius: 4px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--bg-color, #1a1a1a);
+    color: var(--text-color, #ffffff);
+}
+
+.heatmap-cell-large {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 10px;
+    border-radius: 6px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--bg-color, #1a1a1a);
+    color: var(--text-color, #ffffff);
+}
+
+.heatmap-cell:hover,
+.heatmap-cell-large:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+    border: 2px solid #ffff00;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.heatmap-symbol {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.heatmap-price {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 4px 0;
+}
+
+.heatmap-change {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.sector-overview {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    padding: 12px;
+    background-color: var(--bg-color, #1a1a1a);
+    color: var(--text-color, #ffffff);
+}
+
+.sector-overview:hover {
+    opacity: 0.8;
+}
+
+.sector-card {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    padding: 12px;
+    background-color: var(--bg-color, #1a1a1a);
+    color: var(--text-color, #ffffff);
+}
+
+.sector-card:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}

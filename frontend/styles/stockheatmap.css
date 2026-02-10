@@ -1,0 +1,62 @@
+/* Stock Heatmap Styles */
+
+.heatmap-container {
+  cursor: default;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.heatmap-container.dragging {
+  cursor: grab;
+}
+
+.heatmap-container.dragging-active {
+  cursor: grabbing;
+}
+
+.heatmap-svg {
+  display: block;
+  background: rgb(20, 20, 20);
+  overflow: hidden;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.heatmap-tooltip {
+  transform: translateY(-100%);
+}
+
+/* Legend Colors */
+.legend-color-1 {
+  background-color: rgb(153, 31, 41);
+}
+
+.legend-color-2 {
+  background-color: rgb(242, 54, 69);
+}
+
+.legend-color-3 {
+  background-color: rgb(247, 124, 128);
+}
+
+.legend-color-4 {
+  background-color: rgb(201, 201, 201);
+}
+
+.legend-color-5 {
+  background-color: rgb(66, 189, 127);
+}
+
+.legend-color-6 {
+  background-color: rgb(8, 153, 80);
+}
+
+.legend-color-7 {
+  background-color: rgb(5, 102, 54);
+}
+
+/* TradingView Widget */
+.tradingview-widget-height {
+  width: 100%;
+}

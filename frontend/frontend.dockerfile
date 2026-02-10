@@ -1,0 +1,46 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* ./
+
+# Install dependencies with retry and increased timeout
+RUN npm config set fetch-timeout 300000 && \
+    npm config set fetch-retry-mintimeout 20000 && \
+    npm config set fetch-retry-maxtimeout 300000 && \
+    npm install --no-audit --no-fund
+
+# Copy project files
+COPY . .
+
+# Build the application
+# Disable Next.js telemetry
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Build the application with offline mode
+RUN NEXT_TELEMETRY_DISABLED=1 npm run build
+
+# Expose port
+EXPOSE 3000
+
+# Make admin creation scripts executable
+RUN chmod +x /app/create-admin.sh /app/create-admin.js
+
+# Create a startup script that runs admin creation before starting the app
+RUN echo '#!/bin/sh' > /app/entrypoint.sh && \
+    echo 'set -e' >> /app/entrypoint.sh && \
+    echo 'echo "🔐 Initialisation du container frontend..."' >> /app/entrypoint.sh && \
+    echo 'echo "📝 Scripts disponibles:"' >> /app/entrypoint.sh && \
+    echo 'echo "  - node /app/create-admin.js (JavaScript)"' >> /app/entrypoint.sh && \
+    echo 'echo "  - sh /app/create-admin.sh (Shell)"' >> /app/entrypoint.sh && \
+    echo 'echo ""' >> /app/entrypoint.sh && \
+    echo 'echo "⏳ Création de l'"'"'utilisateur admin..."' >> /app/entrypoint.sh && \
+    echo 'node /app/create-admin.js || true' >> /app/entrypoint.sh && \
+    echo 'echo ""' >> /app/entrypoint.sh && \
+    echo 'echo "✅ Démarrage du frontend sur http://localhost:3000"' >> /app/entrypoint.sh && \
+    echo 'exec npm start' >> /app/entrypoint.sh && \
+    chmod +x /app/entrypoint.sh
+
+# Start the application with the entrypoint script
+CMD ["/app/entrypoint.sh"]

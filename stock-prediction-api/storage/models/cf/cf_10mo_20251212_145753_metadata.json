@@ -1,0 +1,19 @@
+{
+  "company": "cf",
+  "lookback_period": "10mo",
+  "training_date": "20251212_145753",
+  "best_hyperparameters": {
+    "slicing_window": 21,
+    "LSTM_units": 48,
+    "dropout_rate": 0.11226935190247105,
+    "epochs": 80
+  },
+  "final_training_loss": 0.18162141740322113,
+  "final_validation_loss": 0.23138783872127533,
+  "slicing_window": 21,
+  "model_architecture": {
+    "LSTM_units": 48,
+    "dropout_rate": 0.11226935190247105,
+    "learning_rate": 0.001
+  }
+}

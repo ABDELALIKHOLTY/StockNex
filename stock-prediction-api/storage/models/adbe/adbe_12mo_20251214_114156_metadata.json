@@ -1,0 +1,19 @@
+{
+  "company": "adbe",
+  "lookback_period": "12mo",
+  "training_date": "20251214_114156",
+  "best_hyperparameters": {
+    "slicing_window": 34,
+    "LSTM_units": 128,
+    "dropout_rate": 0.34518547711238706,
+    "epochs": 80
+  },
+  "final_training_loss": 0.1515745222568512,
+  "final_validation_loss": 0.170659601688385,
+  "slicing_window": 34,
+  "model_architecture": {
+    "LSTM_units": 128,
+    "dropout_rate": 0.34518547711238706,
+    "learning_rate": 0.001
+  }
+}

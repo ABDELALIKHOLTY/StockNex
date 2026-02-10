@@ -1,0 +1,60 @@
+services:
+  frontend:
+    container_name: stocknex-frontend
+    build:
+      context: ./frontend
+      dockerfile: frontend.dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:4000
+    depends_on:
+      - backend
+
+  backend:
+    container_name: stocknex-backend
+    build:
+      context: ./backend
+      dockerfile: backend.dockerfile
+    ports:
+      - 4000:4000
+    environment:
+      - DATABASE_URL_LOCAL=postgresql://postgres:password@db:5432/postgres?schema=public
+    depends_on:
+      db:
+        condition: service_healthy
+
+  prediction-api:
+    container_name: prediction-api
+    build:
+      context: ./stock-prediction-api
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./stock-prediction-api/storage/models:/stock-prediction-api/storage/models
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata: {}  

@@ -1,0 +1,64 @@
+.heatmap-tooltip {
+  display: block;
+}
+
+.heatmap-svg {
+  display: block;
+}
+
+/* Tooltip positioning - use CSS variables for dynamic positioning */
+.heatmap-tooltip-positioned {
+  position: fixed;
+  z-index: 50;
+  background-color: #111827;
+  color: #ffffff;
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #374151;
+  pointer-events: none;
+  left: var(--tooltip-x, 0);
+  top: var(--tooltip-y, 0);
+  white-space: nowrap;
+}
+
+.heatmap-tooltip-positioned div {
+  margin: 0;
+}
+
+.heatmap-tooltip-positioned .font-semibold {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.heatmap-tooltip-positioned .text-gray-300 {
+  color: #d1d5db;
+}
+
+.heatmap-tooltip-positioned .text-green-400 {
+  color: #4ade80;
+}
+
+.heatmap-tooltip-positioned .text-red-400 {
+  color: #f87171;
+}
+
+.heatmap-tooltip-positioned .text-gray-400 {
+  color: #9ca3af;
+  font-size: 0.625rem;
+  margin-top: 0.25rem;
+}
+
+.heatmap-tooltip-close-button {
+  margin-top: 0.5rem;
+  color: #9ca3af;
+  font-size: 0.625rem;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.heatmap-tooltip-close-button:hover {
+  color: #ffffff;
+}

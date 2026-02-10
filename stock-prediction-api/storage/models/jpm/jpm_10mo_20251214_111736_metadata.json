@@ -1,0 +1,19 @@
+{
+  "company": "jpm",
+  "lookback_period": "10mo",
+  "training_date": "20251214_111736",
+  "best_hyperparameters": {
+    "slicing_window": 33,
+    "LSTM_units": 64,
+    "dropout_rate": 0.18562383693943207,
+    "epochs": 80
+  },
+  "final_training_loss": 0.13302002847194672,
+  "final_validation_loss": 0.1536487489938736,
+  "slicing_window": 33,
+  "model_architecture": {
+    "LSTM_units": 64,
+    "dropout_rate": 0.18562383693943207,
+    "learning_rate": 0.001
+  }
+}

@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL_LOCAL")
+}
+
+model User {
+  id                    Int                      @id @default(autoincrement())
+  email                 String                   @unique
+  username              String
+  password              String
+  createdAt             DateTime                 @default(now())
+  lastLogin             DateTime?
+  loginCount            Int                      @default(0)
+  isAdmin               Boolean                  @default(false)
+  
+  // Relations
+  watchlistItems        WatchlistItem[]
+  predictions           UserPrediction[]
+  activityLogs          ActivityLog[]
+  
+  @@map("users")
+}
+
+model WatchlistItem {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  symbol      String
+  companyName String?
+  addedAt     DateTime @default(now())
+  
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, symbol])
+  @@map("watchlist_items")
+}
+
+model UserPrediction {
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  symbol          String
+  companyName     String?
+  predictedPrice  Float?
+  viewedAt        DateTime @default(now())
+  
+  // Relations
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("user_predictions")
+}
+
+model ActivityLog {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  action      String   // "login", "view_prediction", "add_watchlist", "remove_watchlist"
+  details     String?  // JSON string with additional details
+  timestamp   DateTime @default(now())
+  
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("activity_logs")
+}

@@ -1,0 +1,25 @@
+# Core dependencies
+fastapi==0.120.*
+uvicorn==0.38.*
+pydantic==2.12.*
+python-multipart==0.0.20
+python-dotenv==1.2.*
+
+# Data processing
+pandas==2.3.*
+numpy==1.26.*
+
+# Machine Learning (optional - can be installed separately)
+scikit-learn==1.7.*
+
+# Hyperparameter optimization
+optuna==4.6.*
+
+# Deep Learning Framework
+tensorflow==2.15.*
+
+# Data source
+yfinance==0.2.*
+
+# Testing
+pytest==8.4.*     

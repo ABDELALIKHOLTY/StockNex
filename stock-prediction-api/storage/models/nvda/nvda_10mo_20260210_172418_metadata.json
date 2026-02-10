@@ -1,0 +1,19 @@
+{
+  "company": "nvda",
+  "lookback_period": "10mo",
+  "training_date": "20260210_172418",
+  "best_hyperparameters": {
+    "slicing_window": 30,
+    "LSTM_units": 32,
+    "dropout_rate": 0.2960459039390422,
+    "epochs": 80
+  },
+  "final_training_loss": 0.14883530139923096,
+  "final_validation_loss": 0.232194721698761,
+  "slicing_window": 30,
+  "model_architecture": {
+    "LSTM_units": 32,
+    "dropout_rate": 0.2960459039390422,
+    "learning_rate": 0.001
+  }
+}

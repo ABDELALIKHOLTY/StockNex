@@ -1,0 +1,68 @@
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  try {
+    // Mock data - replace with actual database queries
+    const users = [
+      {
+        id: '1',
+        email: 'user1@example.com',
+        name: 'John Doe',
+        createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+        lastLogin: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+        isActive: true,
+        predictions: 145,
+        avgAccuracy: 81.5,
+      },
+      {
+        id: '2',
+        email: 'user2@example.com',
+        name: 'Jane Smith',
+        createdAt: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString(),
+        lastLogin: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+        isActive: true,
+        predictions: 89,
+        avgAccuracy: 75.3,
+      },
+      {
+        id: '3',
+        email: 'user3@example.com',
+        name: 'Bob Johnson',
+        createdAt: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString(),
+        lastLogin: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+        isActive: false,
+        predictions: 234,
+        avgAccuracy: 79.8,
+      },
+    ];
+
+    return NextResponse.json(users);
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Failed to fetch users' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    
+    // Create new user in database
+    const newUser = {
+      id: Date.now().toString(),
+      ...body,
+      createdAt: new Date().toISOString(),
+      lastLogin: null,
+      isActive: true,
+    };
+
+    return NextResponse.json(newUser, { status: 201 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Failed to create user' },
+      { status: 500 }
+    );
+  }
+}

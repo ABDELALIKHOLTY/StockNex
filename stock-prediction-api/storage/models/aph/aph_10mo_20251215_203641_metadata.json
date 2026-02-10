@@ -1,0 +1,19 @@
+{
+  "company": "aph",
+  "lookback_period": "10mo",
+  "training_date": "20251215_203641",
+  "best_hyperparameters": {
+    "slicing_window": 30,
+    "LSTM_units": 48,
+    "dropout_rate": 0.18436009451854535,
+    "epochs": 80
+  },
+  "final_training_loss": 0.07622702419757843,
+  "final_validation_loss": 0.15828871726989746,
+  "slicing_window": 30,
+  "model_architecture": {
+    "LSTM_units": 48,
+    "dropout_rate": 0.18436009451854535,
+    "learning_rate": 0.001
+  }
+}

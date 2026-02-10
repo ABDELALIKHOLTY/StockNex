@@ -1,0 +1,19 @@
+{
+  "company": "hpe",
+  "lookback_period": "10mo",
+  "training_date": "20251213_130611",
+  "best_hyperparameters": {
+    "slicing_window": 43,
+    "LSTM_units": 32,
+    "dropout_rate": 0.35028144271503714,
+    "epochs": 80
+  },
+  "final_training_loss": 0.1462876945734024,
+  "final_validation_loss": 0.27050450444221497,
+  "slicing_window": 43,
+  "model_architecture": {
+    "LSTM_units": 32,
+    "dropout_rate": 0.35028144271503714,
+    "learning_rate": 0.001
+  }
+}

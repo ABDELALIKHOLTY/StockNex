@@ -1,0 +1,19 @@
+{
+  "company": "iff",
+  "lookback_period": "10mo",
+  "training_date": "20251215_213905",
+  "best_hyperparameters": {
+    "slicing_window": 28,
+    "LSTM_units": 128,
+    "dropout_rate": 0.38235806291863317,
+    "epochs": 80
+  },
+  "final_training_loss": 0.19647271931171417,
+  "final_validation_loss": 0.17243234813213348,
+  "slicing_window": 28,
+  "model_architecture": {
+    "LSTM_units": 128,
+    "dropout_rate": 0.38235806291863317,
+    "learning_rate": 0.001
+  }
+}
