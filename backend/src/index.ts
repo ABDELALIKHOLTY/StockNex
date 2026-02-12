@@ -15,7 +15,7 @@ const yahooFinance = new YahooFinance();
 const app = express();
 const prisma = new PrismaClient();
 const generateJwt = (user: User): string => {
-  return sign({ id: user.id, email: user.email }, "JWT_SECRET");
+  return sign({ id: user.id, email: user.email }, process.env.JWT_SECRET || "");
 };
 
 app.use(express.json());
