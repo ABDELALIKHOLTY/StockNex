@@ -1,6 +1,10 @@
+
+
 <p align="center">
   <img src="screenshots/stocknex-logo.png" alt="StockNex Logo" width="400">
 </p>
+
+<h1 align="center">StockNex – Adaptive Stock Market Prediction Platform</h1>
 
 <p align="center">
   <strong>500+ Specialized LSTM Models • Real-Time Market Intelligence • Continuous Learning System</strong>
@@ -43,27 +47,10 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
-  <img src="https://img.shields.io/badge/Status-Production_Ready-green">
-  <img src="https://img.shields.io/badge/Version-1.0.0-blue">
-  <img src="https://img.shields.io/badge/Last_Updated-December_2025-orange">
-</p>
-
-<p align="center">
-  <img src="screenshots/stocknex-logo.png" alt="StockNex Logo" width="400">
-</p>
-
-<h1 align="center">StockNex – Adaptive Stock Market Prediction Platform</h1>
-
-<p align="center">
-  <strong>500+ Specialized LSTM Models • Real-Time Market Intelligence • Continuous Learning System</strong>
-</p>
-
-<p align="center">
   <a href="#-the-innovation">Innovation</a> •
   <a href="#-key-features">Features</a> •
   <a href="#-quick-start">Quick Start</a> •
-  <a href="#-documentation">Docs</a>
+  <a href="#-documentation">Documentation Suite</a>
 </p>
 
 ---
