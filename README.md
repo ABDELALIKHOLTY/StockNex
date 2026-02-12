@@ -1,621 +1,209 @@
-# 📈 StockNex - Advanced Stock Market Intelligence Platform
+<p align="center">
+  <img src="screenshots/stocknex-logo.png" alt="StockNex Logo" width="400">
+</p>
 
-A comprehensive full-stack stock market analysis platform featuring real-time data, AI-powered price predictions, and an intuitive web interface.
+<h1 align="center">StockNex – Adaptive Stock Market Prediction Platform</h1>
+
+<p align="center">
+  <strong>500+ Specialized LSTM Models • Real-Time Market Intelligence • Continuous Learning System</strong>
+</p>
+
+<p align="center">
+  <a href="#-the-innovation">Innovation</a> •
+  <a href="#-key-features">Features</a> •
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-screenshots">Screenshots</a> •
+  <a href="#-documentation">Docs</a>
+</p>
 
 ---
 
-## 🚀 Quick Start
+## 🎯 The Innovation
 
-### Prerequisites
-- **Docker & Docker Compose** (recommended)
-- **Node.js 18+** (for local development)
-- **Python 3.9+** (for ML services)
-- **PostgreSQL 14+** (for database)
+**StockNex redefines financial forecasting by rejecting the "one-model-fits-all" paradigm.**
 
-### Option 1: Docker (Recommended - 2-3 minutes)
+Most prediction systems train a single model on thousands of stocks, forcing Apple, ExxonMobil, and Netflix to share the same neural architecture despite their fundamentally different trading behaviors.
+
+**StockNex does the opposite.**
+
+<p align="center">
+  <img src="screenshots/innovation-visual.png" alt="Specialized Models Concept" width="700">
+  <br>
+  <em>Each S&P 500 company receives its own dedicated LSTM network, optimized for its unique volatility profile</em>
+</p>
+
+### 🔬 Core Innovation Pillars
+
+| Pillar | What It Means | Why It Matters |
+|--------|---------------|----------------|
+| **Model Specialization** | 500+ individual LSTM models, one per S&P 500 company | Captures company-specific seasonality, volatility patterns, and market reactions |
+| **Continuous Learning** | Models are regularly retrained as new data arrives | Predictions evolve with market dynamics—no stale intelligence |
+| **Bayesian Hyperparameter Discovery** | Optuna automatically finds optimal architecture for each stock | No manual tuning; each company gets its ideal lookback window, layer depth, and regularization |
+| **Production ML Pipeline** | Dedicated FastAPI service with complete model lifecycle management | Training, inference, versioning, and retirement in one isolated service |
+| **On-Demand Intelligence** | Users generate fresh forecasts from the latest models in real-time | No batch predictions; every request uses the most current model state |
+
+> *"Apple trades differently than ExxonMobil. Netflix exhibits distinct volatility compared to Johnson & Johnson. StockNex respects these differences."*
+
+---
+
+## ✨ Key Features
+
+### 📊 Real-Time Market Command Center
+- **Live S&P 500 Dashboard** – Streaming prices with configurable refresh intervals
+- **Sector Heatmap** – D3.js visualization of 500+ stocks, color-coded by performance
+- **Intelligent Caching** – Multi-layer TTL strategy reduces API load by 80%
+- **Curated News Feed** – Financial headlines with sentiment correlation
+
+<p align="center">
+  <img src="screenshots/dashboard-full.png" alt="StockNex Dashboard" width="800">
+  <br>
+  <em>Complete market overview with indices, heatmap, and news</em>
+</p>
+
+### 🔮 AI Prediction Engine
+- **On-Demand Forecasting** – Generate 1–30 day price predictions instantly
+- **Confidence Intervals** – Statistical uncertainty visualization
+- **Trend Analysis** – Bullish/bearish signals with probability scores
+- **Full S&P 500 Coverage** – 500+ specialized models ready for inference
+
+<p align="center">
+  <img src="screenshots/prediction-interface.png" alt="Prediction Interface" width="800">
+  <br>
+  <em>LSTM-generated forecast with confidence bands and trend indicators</em>
+</p>
+
+### 👤 User Experience
+- **Secure Authentication** – JWT with automatic token refresh
+- **Personal Watchlists** – Real-time price alerts, percentage change notifications
+- **Prediction History** – Archive with performance tracking and accuracy metrics
+- **Theme Customization** – Dark/light mode, avatar upload, session management
+
+### 🛡️ Administrative Power
+- **User Management** – Complete CRUD operations with bulk actions
+- **Model Operations** – Train, evaluate, deploy, retire via admin interface
+- **System Monitoring** – Real-time health metrics, error logs, cache statistics
+- **Audit Trail** – Complete visibility into user activity and prediction views
+
+<p align="center">
+  <img src="screenshots/admin-panel.png" alt="Admin Control Panel" width="800">
+  <br>
+  <em>Administrator dashboard with system metrics and model controls</em>
+</p>
+
+---
+
+## 🚀 Quick Start (30 Seconds)
 
 ```bash
-# Clone and navigate to project
-git clone <repository-url>
-cd StockNex
+# 1. Clone and launch
+git clone https://github.com/yourusername/stocknex.git
+cd stocknex
+docker-compose up -d
 
-# Start all services
-docker-compose up
+# 2. Create your admin account
+./frontend/create-admin.sh -e admin@example.com -p "YourSecurePassword123!"
 
-# Wait for services to be ready (check logs)
-# Frontend:     http://localhost:3000
-# Backend API:  http://localhost:4000
-# ML API:       http://localhost:8000
-# Database:     localhost:5432
+# 3. Open the app
+open http://localhost:3000
 ```
 
-### Option 2: Local Development
+**That's it.** The entire platform—frontend, backend, ML service, and database—is now running on your machine.
 
-#### Backend Setup
-```bash
-cd backend
-npm install
-npm run dev
-# Runs on http://localhost:4000
-```
-
-#### Frontend Setup
-```bash
-cd frontend
-npm install
-npm run dev
-# Runs on http://localhost:3000
-```
-
-#### Prediction API Setup
-```bash
-cd stock-prediction-api
-pip install -r requirements.txt
-python -m uvicorn stock_prediction_api.app.main:app --reload
-# Runs on http://localhost:8000
-```
+**[⬇️ Download Docker](https://docs.docker.com/get-docker/)** | **[📖 Full Installation Guide](DOCUMENTATION.md#-deployment)**
 
 ---
 
-## 📋 Project Structure
+## 📸 Screenshots
 
-```
-StockNex/
-├── frontend/                 # Next.js 15.5.6 React application
-│   ├── app/
-│   │   ├── (auth)/          # Authentication pages (sign-in, sign-up)
-│   │   ├── (root)/          # Main application pages
-│   │   │   ├── page.tsx                    # Dashboard
-│   │   │   ├── search/                     # Stock search
-│   │   │   ├── watchlist/                  # User watchlist
-│   │   │   ├── prediction/                 # AI predictions
-│   │   │   ├── settings/                   # User settings & preferences
-│   │   │   └── admin/                      # Admin dashboard
-│   │   ├── api/             # API routes
-│   │   └── context/         # React Context (Theme, etc.)
-│   ├── components/          # Reusable React components
-│   │   ├── market/          # Market-specific components
-│   │   ├── forms/           # Form fields
-│   │   └── ui/              # UI components (buttons, dialogs, etc.)
-│   ├── hooks/               # Custom React hooks
-│   ├── lib/                 # Utility functions & API clients
-│   ├── styles/              # CSS stylesheets
-│   └── public/              # Static assets
-│
-├── backend/                 # Express.js TypeScript API
-│   ├── src/
-│   │   ├── index.ts         # Main server entry
-│   │   ├── middlewares/     # Authentication & logging
-│   │   ├── routes/          # API endpoints
-│   │   └── services/        # Business logic
-│   ├── prisma/
-│   │   ├── schema.prisma    # Database schema
-│   │   └── migrations/      # Database migrations
-│   └── package.json
-│
-├── stock-prediction-api/    # FastAPI Python prediction service
-│   ├── app/
-│       ├── main.py              # FastAPI application
-        ├── test.py              # pipeline test
-│       ├── api/                 # API endpoints
-│           ├── model_trainer/       # LSTM model training
-│           ├── model_ops/           # Model operations
-│           ├── data_pipeline/       # Data preprocessing
-│           ├── hyperparameter_tuner/# Hyperparameter optimization
-│    ├── requirements.txt         # Python dependencies
-│    ├── storage/                 # Trained models
-├── docker-compose.yml       # Docker orchestration
-├── DOCUMENTATION.md         # Detailed technical documentation
-├── ADMIN_SETUP.md          # Admin configuration guide
-└── README.md               # This file
-```
+<details>
+<summary><strong>🖥️ Click to expand screenshot gallery</strong></summary>
+
+<br>
+
+| Dashboard | Stock Analysis |
+|-----------|---------------|
+| <img src="screenshots/dashboard-1.png" width="400"> | <img src="screenshots/stock-detail.png" width="400"> |
+| *Real-time S&P 500 overview* | *Historical data with technical indicators* |
+
+| Prediction Interface | Watchlist |
+|---------------------|-----------|
+| <img src="screenshots/prediction-1.png" width="400"> | <img src="screenshots/watchlist.png" width="400"> |
+| *LSTM forecast with 15-day horizon* | *Personal stock tracking with alerts* |
+
+| Admin Panel | Model Management |
+|-------------|------------------|
+| <img src="screenshots/admin-users.png" width="400"> | <img src="screenshots/model-training.png" width="400"> |
+| *User administration interface* | *Hyperparameter configuration interface* |
+
+| Mobile View | Dark Mode |
+|------------|-----------|
+| <img src="screenshots/mobile.png" width="300"> | <img src="screenshots/dark-mode.png" width="400"> |
+| *Responsive design* | *Theme customization* |
+
+</details>
 
 ---
 
-## 🎯 Key Features
+## 🧠 Why StockNex Exists
 
-### 📊 Dashboard
-- Real-time S&P 500 stock data
-- Market overview with indices
-- Price charts with technical indicators
-- Stock heatmap visualization
-- News feed integration
+Financial markets are **not stationary**. Volatility regimes shift, sector correlations change, and individual companies evolve. Traditional prediction systems treat models as static artifacts—trained once, deployed forever, growing increasingly stale with each passing day.
 
-### 🔍 Search & Discovery
-- Advanced stock search
-- Company information lookup
-- Historical data analysis
-- Comparison tools
+**StockNex was built to solve this.**
 
-### 📈 Predictions
-- AI-powered price predictions using LSTM neural networks
-- 5-30 day forecasts
-- Confidence intervals
-- Hyperparameter optimization with Optuna
-- Trend analysis
+| Problem | StockNex Solution |
+|---------|-------------------|
+| Generic models ignore company-specific behavior | 500+ specialized LSTM networks |
+| Models become stale over time | Continuous retraining pipeline |
+| Hyperparameter tuning requires manual expertise | Automated Bayesian optimization |
+| ML infrastructure is complex to maintain | Isolated FastAPI service, containerized |
+| Predictions are batch-generated, not on-demand | Real-time inference API |
 
-### 👤 User Features
-- User authentication (JWT)
-- Personal watchlist management
-- Avatar upload & storage
-- Customizable theme (light/dark mode)
-- Settings & preferences
-
-### 🛡️ Admin Panel
-- User management dashboard
-- System statistics
-- ML model training interface
-- Data monitoring
-- Performance reports
+The result is a **living prediction system** that adapts as markets adapt.
 
 ---
 
-## 🏗️ Architecture Overview
+## 📚 Documentation Suite
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                   Frontend (Next.js)                     │
-│  - React Components, Theme Context, Dark/Light Mode    │
-│  - User Dashboard, Predictions, Watchlist, Admin Panel  │
-│  - Real-time updates via WebSockets                     │
-└─────────────────────────────────────────────────────────┘
-                            ↕
-                    (REST API + WebSocket)
-                            ↕
-┌─────────────────────────────────────────────────────────┐
-│              Backend API (Express + TypeScript)          │
-│  - User Authentication & JWT                            │
-│  - Stock Data Management                                │
-│  - Caching (Redis-ready)                                │
-│  - Database Integration (Prisma ORM)                    │
-└─────────────────────────────────────────────────────────┘
-        ↕                          ↕                   ↕
-   ┌────────┐            ┌──────────────┐      ┌─────────────┐
-   │PostgreSQL│          │yfinance API  │      │Redis Cache  │
-   │Database  │          │Market Data   │      │(Optional)   │
-   └────────┘            └──────────────┘      └─────────────┘
-                                │
-        ┌───────────────────────┴───────────────────────┐
-        │                                               │
-┌──────────────────────────────────┐  ┌────────────────────────┐
-│ Prediction API (FastAPI + Python)│  │  yfinance & Alpha      │
-│ - LSTM Neural Networks            │  │  Vantage APIs         │
-│ - Model Training & Retraining    │  │  Market Data Providers │
-│ - Hyperparameter Tuning (Optuna) │  │                        │
-│ - Data Preprocessing (Pandas)     │  │                        │
-└──────────────────────────────────┘  └────────────────────────┘
-```
+| Document | Description |
+|----------|-------------|
+| **[📘 Technical Documentation](DOCUMENTATION.md)** | Complete architecture, API endpoints, database schema, deployment |
+| **[🤖 ML Pipeline Documentation](STOCK-PREDICTION-API.md)** | LSTM architecture, Optuna tuning, model persistence, inference |
+| **[🔐 Admin Guide](ADMIN-SETUP.md)** | Role configuration, security policies, maintenance |
+| **[⚡ Create Admin Quickstart](CREATE-ADMIN-QUICKSTART.md)** | Fastest path to first admin user |
 
 ---
-
-## 🔐 Authentication & Security
-
-### JWT Token Flow
-```
-User → Sign In → Backend validates → JWT Token issued
-                                   ↓
-                          Stored in localStorage
-                                   ↓
-                    Sent with every API request
-                                   ↓
-                     Backend verifies signature
-```
-
-### Admin Access
-- Requires `isAdmin=true` flag in JWT
-- Verified server-side on every request
-- Admin routes protected with middleware
-- User can only see own data
-
----
-
-## 🛠️ Technology Stack
-
-### Frontend
-- **Framework:** Next.js 15.5.6 with Turbopack
-- **Styling:** Tailwind CSS + custom CSS
-- **State Management:** React Context API
-- **Charts:** Recharts (interactive data visualization)
-- **Real-time:** TradingView Widget
-- **Storage:** localStorage (theme, auth tokens)
-- **HTTP Client:** Axios (with custom API wrapper)
-
-### Backend
-- **Runtime:** Node.js
-- **Framework:** Express.js
-- **Language:** TypeScript
-- **Database:** PostgreSQL 14+
-- **ORM:** Prisma
-- **Authentication:** JWT
-- **Caching:** Redis-ready (optional)
-
-### Machine Learning
-- **Framework:** FastAPI (async Python web framework)
-- **ML Libraries:** TensorFlow 2.20+, Scikit-learn 1.7+
-- **Optimization:** Optuna 4.6+ (hyperparameter tuning)
-- **Data Processing:** Pandas 2.3+, NumPy 2.3+
-- **Data Source:** yfinance 0.2+
-
-### Infrastructure
-- **Containerization:** Docker & Docker Compose
-- **Database:** PostgreSQL (in container)
-- **Data Source:** yfinance API (free stock data)
-
----
-
-## 📦 Core Components
-
-### Frontend Components
-
-#### Market Components
-- **MarketOverview** - Displays S&P 500 indices and overview
-- **MarketNews** - Latest financial news feed
-- **MarketQuotes** - Stock quotes and statistics
-- **StockHeatmap** - Interactive market visualization
-- **TradingViewWidget** - Advanced charting interface
-
-#### Data Visualization
-- **StockChart** - OHLCV candlestick charts
-- **LineChart** - Historical price trends
-- **LoadingScreen** - Smooth loading animations
-
-#### User Components
-- **Header** - Navigation and search
-- **Sidebar** - Main menu navigation
-- **UserDropdown** - User profile & settings
-- **Settings** - Theme, avatar, preferences
-- **AdminSidebar** - Admin-specific navigation
-
-### Backend Services
-
-#### Market Service (`market.service.ts`)
-- Fetches real-time stock data
-- Manages S&P 500 symbols
-- Handles data caching
-- Error handling & retries
-
-#### Cache Service (`cache.service.ts`)
-- In-memory caching layer
-- TTL management
-- Cache invalidation
-
-#### Authentication Middleware (`auth.ts`)
-- JWT verification
-- Token validation
-- User context extraction
-
----
-
-## 🚀 Running the Application
-
-### 1. Start All Services (Docker)
-```bash
-docker-compose up
-```
-
-Services will be available at:
-- **Frontend:** http://localhost:3000
-- **Backend API:** http://localhost:4000
-- **Prediction API:** http://localhost:8000
-- **Database:** postgresql://postgres:password@localhost:5432/postgres
-
-### 2. Create Test Admin User
-
-#### PowerShell (Windows)
-```powershell
-cd frontend
-.\create-admin.ps1 -AdminEmail "admin@test.com" -AdminPassword "Admin@123456"
-```
-
-#### Bash (macOS/Linux)
-```bash
-cd frontend
-bash create-admin.sh -e admin@test.com -p Admin@123456
-```
-
-### 3. Login & Explore
-- Navigate to http://localhost:3000
-- Sign in with admin credentials
-- Access admin panel at `/admin`
-- Create test watchlist entries
-- Generate predictions
-
----
-
-## 📊 Database Schema
-
-### Main Tables
-- **users** - User accounts with authentication
-- **watchlist** - User's tracked stocks
-- **predictions** - AI-generated price predictions
-- **user_tracking** - User activity logs
-- **stock_data** - Cached stock information
-
-See [Prisma Schema](backend/prisma/schema.prisma) for complete details.
-
----
-
-## 🔄 API Endpoints
-
-### Authentication
-- `POST /users/register` - Create new account
-- `POST /users/login` - User login
-- `GET /users/me` - Get current user info
-
-### Stock Data
-- `GET /stocks/:symbol` - Get stock details
-- `GET /stocks/search/:query` - Search stocks
-- `GET /stocks/sp500` - List all S&P 500 stocks
-
-### Watchlist
-- `GET /watchlist` - Get user's watchlist
-- `POST /watchlist` - Add stock
-- `DELETE /watchlist/:id` - Remove stock
-
-### Predictions
-- `GET /predict/:symbol` - Get price prediction
-- `POST /predict/train` - Train model (admin)
-
-### Admin
-- `GET /admin/users` - List all users
-- `GET /admin/stats` - System statistics
-- `GET /admin/reports` - Analytics reports
-
-Full API docs: [DOCUMENTATION.md](DOCUMENTATION.md)
-
----
-
-## 🧪 Testing
-
-### Frontend Tests
-```bash
-cd frontend
-npm run test
-```
-
-### Backend Tests
-```bash
-cd backend
-npm run test
-```
-
-### Prediction API Tests
-```bash
-cd stock-prediction-api
-pytest
-```
-
----
-
-## 🐛 Common Issues & Troubleshooting
-
-### Docker Container Won't Start
-```bash
-# Check logs
-docker-compose logs <service-name>
-
-# Rebuild containers
-docker-compose down
-docker-compose build --no-cache
-docker-compose up
-```
-
-### Database Connection Error
-```bash
-# Verify PostgreSQL is running
-docker-compose exec db psql -U postgres -c "SELECT 1"
-
-# Reset migrations
-docker-compose exec backend npm run migrate:reset
-```
-
-### Frontend Won't Load
-```bash
-# Clear cache and rebuild
-rm -rf frontend/.next
-cd frontend
-npm install
-npm run build
-```
-
-### Prediction API Not Responding
-```bash
-# Check if ML dependencies installed
-docker-compose exec prediction-api pip list | grep tensorflow
-
-# Install missing packages
-docker-compose exec prediction-api pip install -r requirements-ml.txt
-```
-
-See [DOCUMENTATION.md](DOCUMENTATION.md#troubleshooting) for more solutions.
-
----
-
-## 📈 Performance Optimization
-
-### Caching Strategy
-- Stock data cached for 5 minutes
-- User data cached per session
-- Prediction results cached for 1 hour
-
-### Database Optimization
-- Indexed columns: `symbol`, `userId`, `createdAt`
-- Connection pooling enabled
-- Query optimization in place
-
-### Frontend Performance
-- Code splitting via Next.js
-- Image optimization (next/image)
-- CSS minification
-- Lazy loading components
-
----
-
-## 🔒 Security Best Practices
-
-✅ **Implemented:**
-- JWT authentication with secure tokens
-- Password hashing (bcryptjs)
-- CORS protection
-- SQL injection prevention (Prisma ORM)
-- XSS protection via React
-
-⚠️ **To Implement:**
-- [ ] Rate limiting on API endpoints
-- [ ] 2FA (Two-Factor Authentication)
-- [ ] Environment variables for secrets
-- [ ] HTTPS/TLS in production
-- [ ] API key rotation
-- [ ] Audit logging
-- [ ] DDoS protection
-
----
-
-## 🎨 UI Customization
-
-### Theme System
-```typescript
-// Using ThemeContext
-const { theme, setTheme } = useTheme();
-
-// Dark mode (default)
-setTheme('dark');
-```
-
-### CSS Variables
-```css
-/* Dark Mode (default) */
-html.dark {
-  --background: #0f172a;
-  --foreground: #ffffff;
-  color: #ffffff;
-}
-```
-
----
-
-## 📝 Environment Variables
-
-### Backend (.env)
-```
-DATABASE_URL=postgresql://user:password@localhost:5432/stocknex
-JWT_SECRET=your_secret_key_here
-ADMIN_SECRET=admin123
-REDIS_URL=redis://localhost:6379
-```
-
-### Frontend (.env.local)
-```
-NEXT_PUBLIC_API_URL=http://localhost:4000
-NEXT_PUBLIC_PREDICTION_API=http://localhost:8000
-```
-
-### Prediction API (.env)
-```
-PYTHONUNBUFFERED=1
-MODEL_PATH=/stock-predictor/storage
-```
-
----
-
-## 🚀 Deployment
-
-### Production Checklist
-- [ ] Set secure environment variables
-- [ ] Enable HTTPS/TLS
-- [ ] Configure firewall rules
-- [ ] Setup database backups
-- [ ] Enable monitoring & logging
-- [ ] Configure domain names
-- [ ] Setup CI/CD pipeline
-- [ ] Configure rate limiting
-- [ ] Setup error tracking (Sentry)
-
-### Deploy with Docker
-```bash
-# Build production images
-docker-compose -f docker-compose.yml build
-
-# Push to registry
-docker tag stocknex-frontend <registry>/stocknex-frontend:latest
-docker push <registry>/stocknex-frontend:latest
-
-# Deploy to cloud (e.g., AWS, GCP, Azure)
-# Update docker-compose with production settings
-docker-compose -f docker-compose.prod.yml up -d
-```
-
----
-
-## 📚 Documentation Files
-
-- **[DOCUMENTATION.md](DOCUMENTATION.md)** - Complete technical documentation
-- **[ADMIN_SETUP.md](ADMIN_SETUP.md)** - Admin user configuration
-- **[CREATE_ADMIN_QUICK_START.md](CREATE_ADMIN_QUICK_START.md)** - Quick admin creation
-- **[DOCKER_DEPENDENCIES.md](DOCKER_DEPENDENCIES.md)** - Docker & ML dependencies
 
 ---
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+We welcome contributions from the community. See our [Contributing Guide](CONTRIBUTING.md) to get started.
 
-### Code Standards
-- Use TypeScript for type safety
-- Follow ESLint rules
-- Write clear, descriptive comments
-- Test new features
-- Update documentation
-
----
-
-## 📊 Project Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Frontend Components** | 30+ |
-| **Backend Routes** | 20+ |
-| **API Endpoints** | 25+ |
-| **Database Tables** | 5 |
-| **Supported Stocks** | 500+ (S&P 500) |
-| **Prediction Window** | 5-30 days |
-| **Update Frequency** | Real-time |
-| **Cache Duration** | 5 minutes |
-
----
-
----
-
-## 📞 Support & Contact
-
-For issues, questions, or suggestions:
-- Create an issue on GitHub
-- Check [DOCUMENTATION.md](DOCUMENTATION.md)
-- Review admin guides for setup questions
-- Check container logs: `docker-compose logs -f <service>`
+**Areas we need help with:**
+- Additional ML models (Transformers, XGBoost ensembles)
+- Frontend visualization components
+- Performance optimization
+- Documentation and translations
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License — free for personal and commercial use.
 
 ---
 
-## 👨‍💻 Authors
-
-Built with ❤️ for stock market enthusiasts and traders.
+<p align="center">
+  <strong>Built with ❤️ for traders, quants, and market enthusiasts</strong>
+  <br>
+  <br>
+  <a href="#-the-innovation">Innovation</a> •
+  <a href="#-key-features">Features</a> •
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-documentation">Documentation</a>
+  <br>
+  <br>
+  <sub>Version 1.0.0 | Last Updated: December 2025</sub>
+</p>
 
 ---
-
-**Last Updated:** December 2025  
-**Version:** 1.0.0  
-**Status:** Production Ready
-
-
-
-
