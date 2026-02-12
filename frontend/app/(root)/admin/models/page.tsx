@@ -4,6 +4,14 @@ import { useEffect, useState } from 'react';
 import { SP500_SYMBOLS } from '@shared/data/sp500-symbols';
 import { useAlert } from '@/app/context/AlertContext';
 import { ClientOnly } from '@/app/components/ClientOnly';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 interface Hyperparameters {
   lookback_period: number;
@@ -68,6 +76,9 @@ function ModelsPageContent() {
   const [nTrials, setNTrials] = useState<number>(20);
   const [trainingMessage, setTrainingMessage] = useState<string>('');
   const [trainingError, setTrainingError] = useState<string>('');
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [companyToDelete, setCompanyToDelete] = useState<string>('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Fetch models on startup
   useEffect(() => {
@@ -208,10 +219,17 @@ function ModelsPageContent() {
 
   // Function to delete models
   const handleDeleteModel = async (company: string) => {
-    if (!confirm(`Delete all models for ${company}?`)) return;
+    setCompanyToDelete(company);
+    setShowDeleteDialog(true);
+  };
 
+  // Function to confirm deletion
+  const confirmDelete = async () => {
+    if (!companyToDelete) return;
+
+    setIsDeleting(true);
     try {
-      const response = await fetch(`/admin/models/api/delete?company=${company}`, {
+      const response = await fetch(`/admin/models/api/delete?company=${companyToDelete}`, {
         method: 'DELETE',
       });
 
@@ -219,13 +237,19 @@ function ModelsPageContent() {
         throw new Error('Deletion error');
       }
 
-      setTrainingMessage(`✅ Models for ${company} deleted`);
+      // Fermer le dialog immédiatement
+      setShowDeleteDialog(false);
+      setCompanyToDelete('');
+      setIsDeleting(false);
+
+      setTrainingMessage(`✅ Models for ${companyToDelete} deleted`);
       addAlert({
         type: 'success',
         title: 'Models Deleted',
-        message: `All models for ${company} have been deleted successfully`,
+        message: `All models for ${companyToDelete} have been deleted successfully`,
       });
 
+      // Recharger les modèles après un délai court
       setTimeout(() => {
         fetchAllModels();
         setTrainingMessage('');
@@ -236,8 +260,11 @@ function ModelsPageContent() {
       addAlert({
         type: 'error',
         title: 'Deletion Failed',
-        message: `Failed to delete models for ${company}: ${errorMessage}`,
+        message: `Failed to delete models for ${companyToDelete}: ${errorMessage}`,
       });
+      setShowDeleteDialog(false);
+      setCompanyToDelete('');
+      setIsDeleting(false);
     }
   };
 
@@ -261,7 +288,7 @@ function ModelsPageContent() {
             <h1 className="text-5xl font-bold bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
               Prediction Models
             </h1>
-            <p className="text-gray-400 text-lg">Manage and train your LSTM models</p>
+            <p className="text-gray-400 text-lg">Manage and train your models</p>
           </div>
           <div className="flex gap-3">
             <button
@@ -556,6 +583,49 @@ function ModelsPageContent() {
           )}
         </div>
       )}
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <DialogContent className="bg-slate-800 border-slate-700">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold text-red-400">
+              ⚠️ Delete Models
+            </DialogTitle>
+            <DialogDescription className="text-gray-300 mt-2">
+              Are you sure you want to delete all models for <span className="font-semibold text-white">{companyToDelete}</span>? 
+              <br />
+              <span className="text-sm text-red-300 mt-2 block">
+                This action cannot be undone.
+              </span>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-3 flex justify-end mt-6">
+            <button
+              onClick={() => {
+                setShowDeleteDialog(false);
+                setCompanyToDelete('');
+              }}
+              disabled={isDeleting}
+              className="px-4 py-2 rounded-lg border border-slate-600 text-gray-300 hover:bg-slate-700 hover:border-slate-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={confirmDelete}
+              disabled={isDeleting}
+              className="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            >
+              {isDeleting ? (
+                <>
+                  <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  Deleting...
+                </>
+              ) : (
+                '🗑️ Delete All Models'
+              )}
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
-}
