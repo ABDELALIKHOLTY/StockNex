@@ -31,9 +31,21 @@ class CacheService {
             timestamp: Date.now(),
         });
     }
-    // Get TTL for a key (default 5 minutes)
+    // Get TTL for a key
     getTTL(key) {
-        // Check for pattern match (e.g., "stock:*" matches "stock:AAPL")
+        // Stock price data: 15 seconds (volatile, needs real-time updates)
+        if (key.startsWith('stock:')) {
+            return 15 * 1000; // 15 seconds
+        }
+        // Historical/chart data: 5 minutes (less volatile)
+        if (key.startsWith('historical:')) {
+            return 5 * 60 * 1000; // 5 minutes
+        }
+        // Heatmap data: 15 seconds (fairly volatile)
+        if (key.startsWith('heatmap:')) {
+            return 15 * 1000; // 15 seconds
+        }
+        // Check for custom patterns
         for (const [pattern, ttl] of this.ttls) {
             if (pattern.includes('*')) {
                 const regex = new RegExp('^' + pattern.replace('*', '.*') + '$');
@@ -75,9 +87,9 @@ class CacheService {
 exports.CacheService = CacheService;
 exports.cacheService = new CacheService();
 // Configure default TTLs for different cache types
-exports.cacheService.setDefaultTTL('overview', 10 * 60 * 1000); // 10 minutes
-exports.cacheService.setDefaultTTL('heatmap', 15 * 60 * 1000); // 15 minutes
-exports.cacheService.setDefaultTTL('stock:*', 60 * 60 * 1000); // 1 hour
-exports.cacheService.setDefaultTTL('details:*', 60 * 60 * 1000); // 1 hour
+exports.cacheService.setDefaultTTL('overview', 5 * 60 * 1000); // 5 minutes - reduced API calls
+exports.cacheService.setDefaultTTL('heatmap', 10 * 60 * 1000); // 10 minutes - IMPORTANT to reduce 429 errors
+exports.cacheService.setDefaultTTL('stock:*', 30 * 1000); // 30 seconds
+exports.cacheService.setDefaultTTL('details:*', 30 * 1000); // 30 seconds
 exports.cacheService.setDefaultTTL('historical:*', 60 * 60 * 1000); // 1 hour
-exports.cacheService.setDefaultTTL('quotes', 5 * 60 * 1000); // 5 minutes
+exports.cacheService.setDefaultTTL('quotes', 10 * 60 * 1000); // 10 minutes

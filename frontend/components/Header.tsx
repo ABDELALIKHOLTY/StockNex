@@ -3,7 +3,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { SearchIcon } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { api } from '@/lib/api'
 
@@ -151,9 +151,9 @@ const Header = () => {
               <Image 
                 src="/assets/logo.svg" 
                 alt="Stock-nex logo" 
-                width={175} 
-                height={40} 
-                className='h-8 w-auto cursor-pointer'
+                width={220} 
+                height={50} 
+                className='h-12 w-auto cursor-pointer'
                 priority
               />
             </Link>
@@ -176,7 +176,7 @@ const Header = () => {
                   className='absolute right-2 p-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-full transition-colors'
                   aria-label="Search"
                 >
-                  <SearchIcon size={20} />
+                  <Search size={20} />
                 </button>
               </div>
 

@@ -1,8 +1,0 @@
-reviews:
-  sequence_diagrams: true  # Active les diagrammes de séquence
-  # Autres configurations optionnelles
-  path_filters:
-    - "**/*.ts"
-    - "**/*.tsx"
-    - "**/*.js"
-    - "**/*.jsx"

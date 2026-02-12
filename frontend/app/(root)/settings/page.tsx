@@ -2,7 +2,16 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Upload, LogOut } from 'lucide-react';
+import { LogOut } from 'lucide-react';
+
+// Custom Upload Icon Component
+const UploadIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+    <polyline points="17 8 12 3 7 8" />
+    <line x1="12" y1="3" x2="12" y2="15" />
+  </svg>
+);
 
 function SettingsContent() {
   const router = useRouter();
@@ -122,7 +131,7 @@ function SettingsContent() {
                   className="absolute bottom-0 right-0 bg-cyan-500 hover:bg-cyan-600 text-white p-3 rounded-full cursor-pointer transition-colors shadow-lg"
                   aria-label="Upload profile picture"
                 >
-                  <Upload size={20} />
+                  <UploadIcon size={20} />
                   <input
                     id="avatar-upload"
                     type="file"

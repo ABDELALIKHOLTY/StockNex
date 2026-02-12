@@ -2,6 +2,12 @@ FROM node:20-alpine
 
 WORKDIR /app
 
+# Clear apk cache and update, then install minimal build dependencies
+RUN rm -rf /var/cache/apk/* && \
+    apk update && \
+    apk add --no-cache --no-progress \
+    python3 make
+
 # Copy package files
 COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* ./
 
@@ -9,7 +15,7 @@ COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* ./
 RUN npm config set fetch-timeout 300000 && \
     npm config set fetch-retry-mintimeout 20000 && \
     npm config set fetch-retry-maxtimeout 300000 && \
-    npm install --no-audit --no-fund
+    npm ci --prefer-offline --no-audit --no-fund
 
 # Copy project files
 COPY . .
@@ -18,7 +24,7 @@ COPY . .
 # Disable Next.js telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Build the application with offline mode
+# Build the application
 RUN NEXT_TELEMETRY_DISABLED=1 npm run build
 
 # Expose port

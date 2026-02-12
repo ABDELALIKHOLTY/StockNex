@@ -1,0 +1,19 @@
+{
+  "company": "nke",
+  "lookback_period": "10mo",
+  "training_date": "20260212_124308",
+  "best_hyperparameters": {
+    "slicing_window": 30,
+    "LSTM_units": 96,
+    "dropout_rate": 0.12271549733929132,
+    "epochs": 80
+  },
+  "final_training_loss": 0.18802234530448914,
+  "final_validation_loss": 0.17580130696296692,
+  "slicing_window": 30,
+  "model_architecture": {
+    "LSTM_units": 96,
+    "dropout_rate": 0.12271549733929132,
+    "learning_rate": 0.001
+  }
+}

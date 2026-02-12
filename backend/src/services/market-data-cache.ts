@@ -83,10 +83,10 @@ class MarketDataCache {
       'Consumer Discretionary': ['HD', 'MCD', 'NKE', 'LOW', 'SBUX', 'TJX', 'BKNG', 'ABNB', 'CMG', 'MAR', 'HLT', 'ORLY', 'AZO', 'YUM', 'ROST', 'DHI', 'LEN', 'PHM', 'NVR', 'POOL'],
       'Consumer Staples': ['WMT', 'PG', 'COST', 'KO', 'PEP', 'PM', 'MO', 'MDLZ', 'CL', 'KMB', 'GIS', 'KHC', 'HSY', 'K', 'CAG', 'SJM', 'CPB', 'HRL', 'MKC', 'CHD'],
       'Energy': ['XOM', 'CVX', 'COP', 'SLB', 'EOG', 'MPC', 'PSX', 'VLO', 'OXY', 'WMB', 'KMI', 'HES', 'HAL', 'BKR', 'FANG', 'DVN', 'MRO', 'APA', 'CTRA', 'OVV'],
-      'Industrials': ['BA', 'CAT', 'MMM', 'RTX', 'GE', 'HON', 'ITW', 'LMT', 'NOC', 'PCAR', 'PWM', 'RSG', 'ROK', 'SNA', 'SWKS', 'DOV', 'EMR', 'ETN', 'GWW', 'IR'],
+      'Industrials': ['BA','FLWS', 'CAT', 'MMM', 'RTX', 'GE', 'HON', 'ITW', 'LMT', 'NOC', 'PCAR', 'PWM', 'RSG', 'ROK', 'SNA', 'SWKS', 'DOV', 'EMR', 'ETN', 'GWW', 'IR'],
       'Utilities': ['NEE', 'SO', 'DUK', 'CEG', 'SRE', 'AEP', 'VST', 'D', 'PCG', 'PEG', 'EXC', 'XEL', 'ED', 'WEC', 'ES', 'AWK', 'DTE', 'PPL', 'AEE', 'CMS'],
-      'Real Estate': ['AMT', 'PLD', 'EQIX', 'PSA', 'O', 'SPG', 'WELL', 'DLR', 'VTR', 'SBAC', 'WY', 'INVH', 'MAA', 'ESS', 'UDR', 'AVB', 'EQR', 'REG', 'BXP', 'FRT'],
-      'Communication Services': ['META', 'GOOGL', 'NFLX', 'DIS', 'CMCSA', 'VZ', 'T', 'TMUS', 'CHTR', 'EA', 'TTWO', 'LYV', 'NWSA', 'NWS', 'FOXA', 'FOX', 'OMC', 'IPG', 'MTCH', 'PARA'],
+      'Real Estate': ['AMT', 'PLD', 'EQIX', 'PSA', 'O', 'SPG', 'WELL','FLWS', 'DLR', 'VTR', 'SBAC', 'WY', 'INVH', 'MAA', 'ESS', 'UDR', 'AVB', 'EQR', 'REG', 'BXP', 'FRT'],
+      'Communication Services': [ 'NFLX', 'DIS', 'CMCSA', 'VZ', 'T', 'TMUS', 'CHTR', 'EA', 'TTWO', 'LYV', 'NWSA', 'NWS', 'FOXA', 'FOX', 'OMC', 'IPG', 'MTCH', 'PARA'],
     };
 
     const allStocks: StockData[] = [];

@@ -11,9 +11,9 @@ import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ComposedChar
 
 // SVG Icon Components for restricted icons
 const Loader2 = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{transformOrigin: 'center'}}>
     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    <circle className="opacity-75" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" strokeDasharray="15.7 47.1" strokeLinecap="round"></circle>
   </svg>
 );
 
@@ -264,6 +264,14 @@ function Prediction() {
 
       if (!predictionResponse.ok) {
         let errorMessage = `Failed to get predictions for ${stock.symbol}`;
+        
+        // Check for specific error codes
+        if (predictionResponse.status === 404) {
+          throw new Error(`The prediction model for ${stock.symbol} is not available. Please try again later.`);
+        } else if (predictionResponse.status === 503) {
+          throw new Error('The prediction service is temporarily unavailable. Please try again later.');
+        }
+        
         try {
           const errorData = await predictionResponse.json();
           errorMessage = errorData.error || errorData.detail || errorMessage;
@@ -420,7 +428,6 @@ function Prediction() {
           <Target className="w-8 h-8 text-cyan-400" />
           <h1 className="text-4xl font-bold">Stock Price Prediction</h1>
         </div>
-        <p className="text-slate-400">Predict future stock prices using AI-powered LSTM neural networks</p>
         
         {/* Selected Stock Display */}
         {selectedStock && (
@@ -547,7 +554,7 @@ function Prediction() {
                     style={{ width: `${trainingProgress}%` }}
                   ></div>
                 </div>
-                <p className="text-sm text-gray-400 text-center">Training model... {trainingProgress}%</p>
+                <p className="text-sm text-gray-400 text-center">Getting prediction... {Math.round(trainingProgress)}%</p>
               </div>
             )}
 
@@ -727,17 +734,16 @@ function Prediction() {
               <Target className="w-16 h-16 text-cyan-400 opacity-50 mb-4" />
               <h3 className="text-2xl font-bold text-white mb-2">Ready to Predict</h3>
               <p className="text-gray-400 max-w-md">
-                Select a stock and click "Get Prediction" to analyze its future price movement using advanced AI models.
+                Select a stock and click "Get Prediction" to view future price forecasts.
               </p>
             </div>
           ) : (
             <div className="dashboard-card p-12 text-center flex flex-col items-center justify-center">
               <Loader2 className="w-12 h-12 text-cyan-400 animate-spin mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-2">getting predection</h3>
+              <h3 className="text-2xl font-bold text-white mb-2">Getting Prediction</h3>
               <p className="text-gray-400 mb-2">
-                Analyzing historical data and training the neural network...
+                Processing data and generating price forecast...
               </p>
-              <p className="text-sm text-gray-500">This may take a minute or two</p>
             </div>
           )}
         </div>

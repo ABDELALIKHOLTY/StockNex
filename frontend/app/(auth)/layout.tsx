@@ -6,7 +6,7 @@ const Layout = ({ children }: { children : React.ReactNode }) => {
         <main className="auth-layout">
            <section className="auth-left-section scrollbar-hide-default">
                 <Link href="/" className="auth-logo">
-                    <Image src="/assets/logo.svg" alt="Signalist logo" width={170} height={40} className='h-8 w-auto' />
+                    <Image src="/assets/logo.svg" alt="Signalist logo" width={220} height={50} className='h-12 w-auto' />
                 </Link>
 
                 <div className="pb-6 lg:pb-8 flex-1">{children}</div>

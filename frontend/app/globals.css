@@ -915,3 +915,17 @@ html.light dt,
 html.light dd {
   color: #0f172a;
 }
+
+/* Loading Spinner Animation */
+@keyframes spin-smooth {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin-smooth 1s linear infinite;
+}
