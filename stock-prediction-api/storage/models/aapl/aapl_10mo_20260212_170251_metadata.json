@@ -1,0 +1,19 @@
+{
+  "company": "aapl",
+  "lookback_period": "10mo",
+  "training_date": "20260212_170251",
+  "best_hyperparameters": {
+    "slicing_window": 50,
+    "LSTM_units": 32,
+    "dropout_rate": 0.3452554599030172,
+    "epochs": 80
+  },
+  "final_training_loss": 0.14207221567630768,
+  "final_validation_loss": 0.20743705332279205,
+  "slicing_window": 50,
+  "model_architecture": {
+    "LSTM_units": 32,
+    "dropout_rate": 0.3452554599030172,
+    "learning_rate": 0.001
+  }
+}

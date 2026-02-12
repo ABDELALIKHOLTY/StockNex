@@ -24,32 +24,39 @@ interface MarketNewsProps {
 
 // CACHE MANAGEMENT
 const CACHE_KEY = 'market_news_cache';
-const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes - refresh plus souvent
+const CACHE_SOFT_EXPIRE = 3 * 60 * 1000; // 3 minutes - afficher staleness warning
+const CACHE_REFRESH_INTERVAL = 8 * 60 * 1000; // 8 minutes - auto-refresh
 
 interface CacheData {
   news: NewsItem[];
   timestamp: number;
+  isStale?: boolean;
 }
 
-const getCachedNews = (): CacheData | null => {
+const getCachedNews = (): { data: CacheData | null; isStale: boolean } => {
   try {
     const cached = localStorage.getItem(CACHE_KEY);
-    if (!cached) return null;
+    if (!cached) return { data: null, isStale: false };
     
     const data: CacheData = JSON.parse(cached);
     const now = Date.now();
+    const age = now - data.timestamp;
     
-    // Check if cache is still valid
-    if (now - data.timestamp < CACHE_TTL) {
-      return data;
-    }
+    // Toujours retourner le cache s'il existe (même expiré)
+    // mais marquer s'il est "stale"
+    const isStale = age > CACHE_SOFT_EXPIRE;
     
-    // Cache expired, remove it
-    localStorage.removeItem(CACHE_KEY);
-    return null;
+    return { 
+      data: {
+        ...data,
+        isStale: isStale
+      }, 
+      isStale: age > CACHE_TTL 
+    };
   } catch (error) {
     console.error('Error reading news cache:', error);
-    return null;
+    return { data: null, isStale: false };
   }
 };
 
@@ -189,6 +196,8 @@ const MarketNews = ({ className }: MarketNewsProps) => {
   const [logos, setLogos] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isStale, setIsStale] = useState(false);
+  const [lastRefresh, setLastRefresh] = useState<number>(Date.now());
 
   // Récupérer les logos avec gestion d'erreur et fallback
   const fetchLogos = useCallback(async (symbols: string[]) => {
@@ -236,49 +245,59 @@ const MarketNews = ({ className }: MarketNewsProps) => {
       setError(null);
 
       // Vérifier le cache d'abord
-      const cached = getCachedNews();
-      if (cached) {
+      const { data: cached, isStale: hardExpired } = getCachedNews();
+      if (cached && !hardExpired) {
         console.log('Using cached news data');
         setNews(cached.news);
+        setIsStale(cached.isStale || false);
         const uniqueSymbols = [...new Set(cached.news.map(item => item.ticker).filter(Boolean))];
         await fetchLogos(uniqueSymbols as string[]);
+        setLastRefresh(cached.timestamp);
         setLoading(false);
         return;
       }
       
-      //
+      // Essayer de récupérer les nouvelles données
       const newsData = await getYahooRSSNews(MAJOR_SYMBOLS, 3);
       
-      // Sauvegarder en cache
-      setCachedNews(newsData);
-      setNews(newsData);
+      // Si on a rien reçu mais qu'on a du cache (même expiré), l'utiliser
+      if (newsData.length === 0 && cached) {
+        console.log('Using stale cache because fetch failed');
+        setNews(cached.news);
+        setIsStale(true);
+        setError('News service unavailable - showing cached data');
+        const uniqueSymbols = [...new Set(cached.news.map(item => item.ticker).filter(Boolean))];
+        await fetchLogos(uniqueSymbols as string[]);
+        setLastRefresh(cached.timestamp);
+        setLoading(false);
+        return;
+      }
       
-      // Récupérer les logos des symboles uniques
-      const uniqueSymbols = [...new Set(newsData.map(item => item.ticker).filter(Boolean))];
-      await fetchLogos(uniqueSymbols as string[]);
+      // Sauvegarder les nouvelles données en cache
+      if (newsData.length > 0) {
+        setCachedNews(newsData);
+        setNews(newsData);
+        setIsStale(false);
+        setLastRefresh(Date.now());
+        
+        // Récupérer les logos des symboles uniques
+        const uniqueSymbols = [...new Set(newsData.map(item => item.ticker).filter(Boolean))];
+        await fetchLogos(uniqueSymbols as string[]);
+      }
       
     } catch (error) {
       console.error('Error fetching news:', error);
-      setError('Yahoo Finance unavailable');
+      setError('News temporarily unavailable');
       
-      // Essayer d'utiliser le cache même s'il est expiré (meilleur que rien)
-      const staleCache = (() => {
-        try {
-          const cached = localStorage.getItem(CACHE_KEY);
-          if (cached) {
-            const data: CacheData = JSON.parse(cached);
-            return data.news;
-          }
-        } catch {}
-        return null;
-      })();
-
-      if (staleCache) {
-        setNews(staleCache);
-        const uniqueSymbols = [...new Set(staleCache.map(item => item.ticker).filter(Boolean))];
+      // Fallback: utiliser n'importe quel cache disponible
+      const { data: staleCache } = getCachedNews();
+      if (staleCache && staleCache.news.length > 0) {
+        setNews(staleCache.news);
+        setIsStale(true);
+        const uniqueSymbols = [...new Set(staleCache.news.map(item => item.ticker).filter(Boolean))];
         await fetchLogos(uniqueSymbols as string[]);
+        setLastRefresh(staleCache.timestamp);
       } else {
-        // Pas de fallback - seulement Yahoo Finance
         setNews([]);
       }
     } finally {
@@ -289,8 +308,8 @@ const MarketNews = ({ className }: MarketNewsProps) => {
   useEffect(() => {
     fetchNews();
     
-    // Refresh toutes les 15 minutes
-    const interval = setInterval(fetchNews, 15 * 60 * 1000);
+    // Auto-refresh les news toutes les 8 minutes
+    const interval = setInterval(fetchNews, CACHE_REFRESH_INTERVAL);
     return () => clearInterval(interval);
   }, [fetchNews]);
 
@@ -341,11 +360,26 @@ const MarketNews = ({ className }: MarketNewsProps) => {
     <div className={`w-full h-full bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-lg p-6 flex flex-col ${className}`}>
       <div className="flex items-center justify-between mb-5">
         <h3 className="font-semibold text-2xl text-gray-100">Market News</h3>
-        {error && (
-          <span className="text-sm text-amber-400 bg-amber-400/10 px-3 py-1 rounded">
-            Using stale cache
-          </span>
-        )}
+        <div className="flex items-center gap-3">
+          {isStale && !loading && (
+            <span className="text-xs text-amber-400 bg-amber-400/10 px-2 py-1 rounded">
+              Cached {Math.round((Date.now() - lastRefresh) / 60000)}m ago
+            </span>
+          )}
+          {error && (
+            <span className="text-xs text-red-400 bg-red-400/10 px-2 py-1 rounded">
+              {error}
+            </span>
+          )}
+          <button
+            onClick={() => fetchNews()}
+            disabled={loading}
+            className="text-gray-400 hover:text-cyan-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            title="Refresh news"
+          >
+            {loading ? '⟳' : '↻'}
+          </button>
+        </div>
       </div>
 
       {loading ? (
@@ -394,7 +428,14 @@ const MarketNews = ({ className }: MarketNewsProps) => {
         <div className="text-center text-gray-400 py-12">
           <div className="text-4xl mb-2">📰</div>
           <p>No news available at the moment</p>
-          <p className="text-sm mt-2">Try refreshing the page</p>
+          <p className="text-sm mt-2">
+            <button 
+              onClick={() => fetchNews()}
+              className="text-cyan-400 hover:text-cyan-300 underline"
+            >
+              Try refreshing
+            </button>
+          </p>
         </div>
       )}
 
