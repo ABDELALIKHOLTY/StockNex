@@ -588,26 +588,6 @@ docker-compose -f docker-compose.prod.yml up -d
 
 ---
 
-## 🎯 Roadmap
-
-### Q1 2025
-- [ ] Advanced technical indicators
-- [ ] Portfolio optimization
-- [ ] Email notifications
-- [ ] Mobile app
-
-### Q2 2025
-- [ ] Options trading analysis
-- [ ] Advanced charting tools
-- [ ] Social features (following, sharing)
-- [ ] API key generation for external apps
-
-### Q3 2025
-- [ ] Machine learning model improvements
-- [ ] International markets support
-- [ ] Crypto integration
-- [ ] Advanced risk analysis
-
 ---
 
 ## 📞 Support & Contact
