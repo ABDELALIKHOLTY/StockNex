@@ -2,6 +2,57 @@
   <img src="screenshots/stocknex-logo.png" alt="StockNex Logo" width="400">
 </p>
 
+<p align="center">
+  <strong>500+ Specialized LSTM Models • Real-Time Market Intelligence • Continuous Learning System</strong>
+</p>
+
+<p align="center">
+  <!-- Frontend -->
+  <img src="https://img.shields.io/badge/Next.js-15.5-000000?logo=next.js&logoColor=white">
+  <img src="https://img.shields.io/badge/React-19.1-61DAFB?logo=react&logoColor=black">
+  <img src="https://img.shields.io/badge/TypeScript-5.5-3178C6?logo=typescript&logoColor=white">
+  <img src="https://img.shields.io/badge/Tailwind-3.4-06B6D4?logo=tailwindcss&logoColor=white">
+  <br>
+  <!-- Backend -->
+  <img src="https://img.shields.io/badge/Node.js-20.11-339933?logo=node.js&logoColor=white">
+  <img src="https://img.shields.io/badge/Express-4.19-000000?logo=express&logoColor=white">
+  <img src="https://img.shields.io/badge/PostgreSQL-14-4169E1?logo=postgresql&logoColor=white">
+  <img src="https://img.shields.io/badge/Prisma-6.19-2D3748?logo=prisma&logoColor=white">
+  <br>
+  <!-- ML & Data -->
+  <img src="https://img.shields.io/badge/Python-3.9-3776AB?logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white">
+  <img src="https://img.shields.io/badge/TensorFlow-2.20-FF6F00?logo=tensorflow&logoColor=white">
+  <img src="https://img.shields.io/badge/Optuna-4.6-3E8E9B?logo=optuna&logoColor=white">
+  <img src="https://img.shields.io/badge/scikit--learn-1.7-F7931E?logo=scikit-learn&logoColor=white">
+  <br>
+  <!-- Infrastructure -->
+  <img src="https://img.shields.io/badge/Docker-24.0-2496ED?logo=docker&logoColor=white">
+  <img src="https://img.shields.io/badge/Docker_Compose-2.23-2496ED?logo=docker&logoColor=white">
+  <img src="https://img.shields.io/badge/yFinance-0.2-005F73?logo=yahoo&logoColor=white">
+  <br>
+  <!-- Data Science Stack -->
+  <img src="https://img.shields.io/badge/Pandas-2.3-150458?logo=pandas&logoColor=white">
+  <img src="https://img.shields.io/badge/NumPy-2.3-013243?logo=numpy&logoColor=white">
+  <img src="https://img.shields.io/badge/Keras-3.8-D00000?logo=keras&logoColor=white">
+  <br>
+  <!-- Visualization -->
+  <img src="https://img.shields.io/badge/D3.js-7.8-F9A03C?logo=d3.js&logoColor=white">
+  <img src="https://img.shields.io/badge/Recharts-2.12-22B5BF?logo=recharts&logoColor=white">
+  <img src="https://img.shields.io/badge/Radix_UI-Latest-161618?logo=radix-ui&logoColor=white">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
+  <img src="https://img.shields.io/badge/Status-Production_Ready-green">
+  <img src="https://img.shields.io/badge/Version-1.0.0-blue">
+  <img src="https://img.shields.io/badge/Last_Updated-December_2025-orange">
+</p>
+
+<p align="center">
+  <img src="screenshots/stocknex-logo.png" alt="StockNex Logo" width="400">
+</p>
+
 <h1 align="center">StockNex – Adaptive Stock Market Prediction Platform</h1>
 
 <p align="center">
