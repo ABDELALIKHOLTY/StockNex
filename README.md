@@ -1,4 +1,4 @@
-﻿# 📈 StockNex - Advanced Stock Market Intelligence Platform
+# 📈 StockNex - Advanced Stock Market Intelligence Platform
 
 A comprehensive full-stack stock market analysis platform featuring real-time data, AI-powered price predictions, and an intuitive web interface.
 
