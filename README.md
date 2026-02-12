@@ -91,7 +91,7 @@ Most prediction systems train a single model on thousands of stocks, forcing App
 
 ---
 
-## 🚀 Quick Start (30 Seconds)
+## 🚀 Quick Start
 
 ```bash
 # 1. Clone and launch
