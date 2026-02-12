@@ -12,7 +12,6 @@
   <a href="#-the-innovation">Innovation</a> •
   <a href="#-key-features">Features</a> •
   <a href="#-quick-start">Quick Start</a> •
-  <a href="#-screenshots">Screenshots</a> •
   <a href="#-documentation">Docs</a>
 </p>
 
@@ -203,7 +202,7 @@ MIT License — free for personal and commercial use.
   <a href="#-documentation">Documentation</a>
   <br>
   <br>
-  <sub>Version 1.0.0 | Last Updated: December 2025</sub>
+  <sub>Version 1.0.0 | Last Updated: February 2026</sub>
 </p>
 
 ---
