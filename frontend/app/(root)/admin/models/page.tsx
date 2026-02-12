@@ -628,4 +628,5 @@ function ModelsPageContent() {
         </DialogContent>
       </Dialog>
     </div>
-  );
+  )
+}
