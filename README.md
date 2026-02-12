@@ -1,4 +1,4 @@
-﻿# 📈 StockNex - Advanced Stock Market Intelligence Platform
+# 📈 StockNex - Advanced Stock Market Intelligence Platform
 
 A comprehensive full-stack stock market analysis platform featuring real-time data, AI-powered price predictions, and an intuitive web interface.
 
@@ -478,19 +478,12 @@ See [DOCUMENTATION.md](DOCUMENTATION.md#troubleshooting) for more solutions.
 // Using ThemeContext
 const { theme, setTheme } = useTheme();
 
-// Switch between 'light' and 'dark'
-setTheme(theme === 'dark' ? 'light' : 'dark');
+// Dark mode (default)
+setTheme('dark');
 ```
 
 ### CSS Variables
 ```css
-/* Light Mode */
-html.light {
-  --background: #f5f7fa;
-  --foreground: #0f172a;
-  color: #0f172a;
-}
-
 /* Dark Mode (default) */
 html.dark {
   --background: #0f172a;
