@@ -12,10 +12,15 @@ RUN rm -rf /var/cache/apk/* && \
 COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* ./
 
 # Install dependencies with retry and increased timeout
-RUN npm config set fetch-timeout 300000 && \
-    npm config set fetch-retry-mintimeout 20000 && \
-    npm config set fetch-retry-maxtimeout 300000 && \
-    npm ci --prefer-offline --no-audit --no-fund
+# Using faster npm registry and more aggressive retry settings
+RUN npm config set registry https://registry.npmmirror.com/ && \
+    npm config set fetch-timeout 600000 && \
+    npm config set fetch-retry-mintimeout 10000 && \
+    npm config set fetch-retry-maxtimeout 600000 && \
+    npm config set fetch-retries 10 && \
+    npm config set loglevel verbose && \
+    npm ci --prefer-offline --no-audit --no-fund || \
+    (npm cache clean --force && npm ci --prefer-offline --no-audit --no-fund)
 
 # Copy project files
 COPY . .
