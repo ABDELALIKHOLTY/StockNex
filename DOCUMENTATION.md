@@ -1,8 +1,8 @@
 # 📊 COMPLETE DOCUMENTATION - STOCKNEX
 
-## 🎯 EXECUTIVE SUMMARY
+## 🎯 ABOUT THIS DOCUMENT
 
-**StockNex** is a comprehensive web platform for real-time stock market data management and analysis. It enables users to track market actions, consult predictions, manage watchlists, and access an administration interface for managing the entire system.
+This is the **technical companion** to StockNex's main README. While the README focuses on what the platform does and how to get started, this document explains how it works under the hood.
 
 ---
 
@@ -10,36 +10,7 @@
 
 ### Technology Stack
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    FRONTEND (React/Next.js 15)           │
-│  - Next.js 15.5.6 with Turbopack                         │
-│  - React 19.1.0                                          │
-│  - Recharts for visualization                            │
-│  - Tailwind CSS for design                               │
-│  - Radix UI for accessible components                    │
-└─────────────────────────────────────────────────────────┘
-                            ↓ HTTP API
-┌─────────────────────────────────────────────────────────┐
-│                  BACKEND (Express/Node.js)                │
-│  - Express 4.19.2                                        │
-│  - TypeScript 5.5.3                                      │
-│  - Prisma ORM 6.19.0                                     │
-│  - Yahoo Finance API (stock data)                        │
-│  - JWT for authentication                                │
-│  - Bcrypt for password hashing                           │
-└─────────────────────────────────────────────────────────┘
-                            ↓ SQL
-┌─────────────────────────────────────────────────────────┐
-│              DATABASE (PostgreSQL 12)                     │
-│  - User management                                       │
-│  - Watchlists                                            │
-│  - User predictions                                      │
-│  - Activity logs                                         │
-└─────────────────────────────────────────────────────────┘
-
-ORCHESTRATION: Docker Compose
-```
+<img width="1360" height="706" alt="project_architecture" src="https://github.com/user-attachments/assets/5a8de521-656e-4d58-8480-72fe28f0d716" />
 
 ---
 
