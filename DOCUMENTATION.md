@@ -1,51 +1,75 @@
 # 📊 COMPLETE DOCUMENTATION - STOCKNEX
 
-## 🎯 EXECUTIVE SUMMARY
+## 🎯 ABOUT THIS DOCUMENT
 
-**StockNex** is a comprehensive web platform for real-time stock market data management and analysis. It enables users to track market actions, consult predictions, manage watchlists, and access an administration interface for managing the entire system.
+This is the **technical companion** to StockNex's main README. While the README focuses on what the platform does and how to get started, this document explains how it works under the hood.
 
 ---
 
 ## 🏗️ GENERAL ARCHITECTURE
 
-### Technology Stack
+### System Overview
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    FRONTEND (React/Next.js 15)           │
-│  - Next.js 15.5.6 with Turbopack                         │
-│  - React 19.1.0                                          │
-│  - Recharts for visualization                            │
-│  - Tailwind CSS for design                               │
-│  - Radix UI for accessible components                    │
-└─────────────────────────────────────────────────────────┘
-                            ↓ HTTP API
-┌─────────────────────────────────────────────────────────┐
-│                  BACKEND (Express/Node.js)                │
-│  - Express 4.19.2                                        │
-│  - TypeScript 5.5.3                                      │
-│  - Prisma ORM 6.19.0                                     │
-│  - Yahoo Finance API (stock data)                        │
-│  - JWT for authentication                                │
-│  - Bcrypt for password hashing                           │
-└─────────────────────────────────────────────────────────┘
-                            ↓ SQL
-┌─────────────────────────────────────────────────────────┐
-│              DATABASE (PostgreSQL 12)                     │
-│  - User management                                       │
-│  - Watchlists                                            │
-│  - User predictions                                      │
-│  - Activity logs                                         │
-└─────────────────────────────────────────────────────────┘
+<img width="1360" height="706" alt="project_architecture" src="https://github.com/user-attachments/assets/5a8de521-656e-4d58-8480-72fe28f0d716" />
 
-ORCHESTRATION: Docker Compose
-```
+---
+
+## 💻 TECHNOLOGY STACK
+
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| Frontend | Next.js 15.5.6 + React 19 | App Router, SSR |
+| UI | Radix UI, Recharts, D3.js | Components, Charts |
+| Backend | Express.js + TypeScript | RESTful API |
+| Database | PostgreSQL 14+ + Prisma | Data persistence |
+| ML | FastAPI + LSTM | Price prediction |
+| Auth | JWT + bcrypt | Authentication |
+| Cache | Redis | Performance |
+| APIs | Yahoo Finance, Finnhub | Market data |
 
 ---
 
 ## 📋 DETAILED PROJECT STRUCTURE
 
 ### 1. BACKEND (`/backend`)
+
+#### Directory Structure
+
+```
+backend/
+│
+├── src/
+│   │
+│   ├── index.ts                   # Main entry point
+│   │                              # - Express initialization
+│   │                              # - CORS configuration
+│   │                              # - Admin endpoints
+│   │                              # - Authentication endpoints
+│   │
+│   ├── middlewares/               # Express middleware
+│   │   ├── auth.ts                # JWT authentication
+│   │   └── ...
+│   │
+│   ├── routes/                    # API routes
+│   │   ├── users.ts               # User endpoints
+│   │   ├── watchlist.ts           # Watchlist endpoints
+│   │   ├── predictions.ts         # Prediction endpoints
+│   │   └── ...
+│   │
+│   └── services/                  # Business logic
+│       ├── market.service.ts      # Market data service
+│       ├── cache.service.ts       # Cache management
+│       ├── user.service.ts        # User operations
+│       └── ...
+│
+├── prisma/
+│   ├── schema.prisma              # Database schema
+│   └── migrations/                # Migration history
+│
+├── package.json                   # Dependencies
+├── tsconfig.json                  # TypeScript config
+└── backend.dockerfile             # Docker configuration
+```
 
 #### Database (Prisma Schema)
 
@@ -108,36 +132,233 @@ Models:
 - `GET /api/market/news` - Stock news
 
 **Watchlist:**
-- Add/remove stocks from watchlist
-- Get user watchlist
+- `GET /watchlist` - Get user watchlist
+- `POST /watchlist` - Add stock to watchlist
+- `DELETE /watchlist/:id` - Remove stock from watchlist
 
 **Predictions:**
-- Store and retrieve stock predictions
+- `GET /predictions/:symbol` - Get stock prediction
+- `GET /predictions/history` - Get prediction history
 
 #### Key Services
 
 **MarketService:**
+```
+Responsibility: Fetch and manage market data
+
+Methods:
+├─ getStockPrice(symbol: string)
+│  └─ Returns: { symbol, price, change, changePercent, timestamp }
+│
+├─ getStockHistory(symbol: string, range: string)
+│  ├─ Range options: 1d, 5d, 1mo, 3mo, 6mo, 1y, 5y
+│  └─ Returns: { dates[], prices[], volumes[] }
+│
+├─ searchStock(query: string)
+│  └─ Returns: { symbol, name, exchange, type }[]
+│
+└─ getMarketNews()
+   └─ Returns: { headlines, sentiment }
+
+Features:
 - Fetches stock data via Yahoo Finance API
 - Converts raw data to structured StockData format
-- Manages data for:
-  - Real-time prices
-  - Changes (change, changePercent)
-  - Volumes
-  - Market capitalizations
-  - PE ratios
-  - Sectors
+- Manages: Real-time prices, Changes, Volumes, Market caps, PE ratios, Sectors
+- Error handling with exponential backoff retry
+- Detailed error logging
+```
 
 **CacheService:**
-- In-memory cache with TTL (Time To Live)
-- Different cache strategies:
-  - Stock data: 15 seconds
-  - Historical data: 5 minutes
-  - Heatmap: 15 seconds
-- Reduces load on Yahoo Finance API
+```
+Responsibility: Performance optimization via caching
+
+Strategies:
+├─ In-Memory Cache (default)
+│  ├─ Storage: Map<string, CacheEntry>
+│  ├─ TTL Configuration:
+│  │  ├─ Stock prices: 15 seconds
+│  │  ├─ Historical data: 5 minutes
+│  │  └─ Heatmap: 15 seconds
+│  └─ Limit: 1000 entries max
+│
+└─ Redis Cache (optional)
+   ├─ Persistence across restarts
+   ├─ Shared across instances
+   └─ Automatic TTL expiration
+
+Methods:
+├─ get(key: string): Promise<any>
+├─ set(key: string, value: any, ttl?: number): Promise<void>
+├─ invalidate(pattern: string): Promise<void>
+└─ clear(): Promise<void>
+
+Benefits:
+- Reduces API latency (1 min → 1ms)
+- Reduces load on external APIs
+- Improves user experience
+```
+
+**PredictionService:**
+```
+Responsibility: AI prediction orchestration
+
+Methods:
+├─ getUserPredictions(userId: number)
+│  └─ Returns: UserPrediction[]
+│
+├─ predictStockPrice(symbol: string, userId: number)
+│  ├─ Fetches historical data via MarketService
+│  ├─ Calls ML API (FastAPI, port 8000)
+│  ├─ Receives: { price, confidence, timeframe }
+│  ├─ Stores in database
+│  ├─ Logs activity
+│  └─ Returns: UserPrediction with metadata
+│
+└─ invalidatePrediction(predictionId: number)
+   ├─ Marks as obsolete
+   └─ Requests new prediction
+
+Integration Flow:
+Backend → HTTP POST /predict → ML API (FastAPI)
+  ↓          { symbol, historicalData }       ↓
+  ↓                                      LSTM/RF Model
+  ↓          { price, confidence } ←─────     ↓
+Database ← Store result ← Cache result
+```
 
 ---
 
 ### 2. FRONTEND (`/frontend`)
+
+#### Directory Structure
+
+```
+frontend/
+│
+├── app/                           # Next.js 15 App Router
+│   │
+│   ├── (auth)/                    # Authentication group
+│   │   ├── sign-in/               # Login page
+│   │   ├── sign-up/               # Registration page
+│   │   └── layout.tsx             # Auth layout
+│   │
+│   ├── (root)/                    # Main application group
+│   │   ├── page.tsx               # Dashboard home
+│   │   ├── dashboard/             # Dashboard section
+│   │   │   └── page.tsx
+│   │   ├── search/                # Stock search
+│   │   │   └── page.tsx
+│   │   ├── watchlist/             # User watchlist
+│   │   │   └── page.tsx
+│   │   ├── prediction/            # AI predictions
+│   │   │   └── page.tsx
+│   │   ├── settings/              # User settings
+│   │   │   └── page.tsx
+│   │   ├── admin/                 # Admin panel
+│   │   │   ├── page.tsx
+│   │   │   ├── users/
+│   │   │   ├── alerts/
+│   │   │   ├── data/
+│   │   │   ├── models/
+│   │   │   ├── reports/
+│   │   │   ├── settings/
+│   │   │   ├── stats/
+│   │   │   └── layout.tsx
+│   │   └── layout.tsx             # Main layout
+│   │
+│   ├── api/                       # Next.js API routes
+│   │   ├── auth/                  # Auth endpoints
+│   │   ├── watchlist/             # Watchlist endpoints
+│   │   └── predictions/           # Prediction endpoints
+│   │
+│   ├── context/                   # React Context
+│   │   └── ThemeContext.tsx       # Theme provider
+│   │
+│   ├── globals.css                # Global styles
+│   ├── layout.tsx                 # Root layout
+│   ├── providers.tsx              # Global providers
+│   └── RootLayoutClient.tsx       # Client wrapper
+│
+├── components/                    # Reusable components
+│   │
+│   ├── AuthGuard.tsx              # Protected route guard
+│   ├── AuthModal.tsx              # Auth modal
+│   ├── Header.tsx                 # App header
+│   ├── Sidebar.tsx                # Main sidebar
+│   ├── AdminSidebar.tsx           # Admin sidebar
+│   ├── UserDropdown.tsx           # User menu
+│   ├── Logo.tsx                   # App logo
+│   ├── NavItems.tsx               # Navigation items
+│   │
+│   ├── market/                    # Market components
+│   │   ├── MarketOverview.tsx     # Market indices
+│   │   ├── MarketQuotes.tsx       # Stock quotes
+│   │   ├── StockHeatmap.tsx       # D3.js heatmap
+│   │   ├── MarketNews.tsx         # News feed
+│   │   ├── StockChart.tsx         # Recharts graphs
+│   │   ├── LineChart.tsx          # Line graphs
+│   │   └── TradingViewWidget.tsx  # TradingView widget
+│   │
+│   ├── forms/                     # Form components
+│   │   ├── InputField.tsx         # Text input
+│   │   ├── SelectField.tsx        # Select dropdown
+│   │   └── CountrySelectField.tsx # Country selector
+│   │
+│   └── ui/                        # Radix UI components
+│       ├── button.tsx
+│       ├── dialog.tsx
+│       ├── input.tsx
+│       ├── dropdown-menu.tsx
+│       ├── popover.tsx
+│       ├── card.tsx
+│       ├── label.tsx
+│       ├── select.tsx
+│       ├── avatar.tsx
+│       └── command.tsx
+│
+├── hooks/                         # Custom React hooks
+│   ├── useAdminAuth.ts            # Admin authentication
+│   ├── useAdminProtection.ts      # Admin route protection
+│   ├── useCache.ts                # Client-side cache
+│   ├── useDashboardRefresh.ts     # Dashboard auto-refresh
+│   ├── useTradingViewWidget.tsx   # TradingView integration
+│   ├── useUserTracking.ts         # User activity tracking
+│   └── useWatchlistRefresh.ts     # Watchlist auto-refresh
+│
+├── lib/                           # Utilities and API clients
+│   ├── api.ts                     # General API client
+│   ├── prediction-api.ts          # Prediction API client
+│   ├── Constants.tsx              # App constants
+│   ├── utils.ts                   # Utility functions
+│   ├── sp500-symbols.ts           # S&P 500 symbols
+│   ├── sp500-domains.ts           # S&P 500 sectors
+│   └── generate_symbol_mapping.js # Symbol mapper
+│
+├── styles/                        # CSS stylesheets
+│   ├── globals.css
+│   ├── dashboard.css
+│   ├── heatmap.css
+│   ├── heatmap-interactive.css
+│   ├── heatmap-tooltip.css
+│   ├── stockheatmap.css
+│   └── marketnews.css
+│
+├── types/                         # TypeScript definitions
+│   ├── global.d.ts                # Global types
+│   ├── trading.ts                 # Trading types
+│   ├── heatmap.ts                 # Heatmap types
+│   └── lucide-react.d.ts          # Icon types
+│
+├── public/                        # Static assets
+│   ├── manifest.json              # PWA manifest
+│   ├── clear-cache.html           # Cache utility
+│   └── assets/                    # Images, fonts
+│
+└── shared/                        # Shared code
+    ├── index.ts
+    ├── data/
+    └── utils/
+```
 
 #### Main Pages
 
@@ -165,34 +386,89 @@ Models:
 - `/(auth)/sign-in/` - Login page
 - `/(auth)/sign-up/` - Registration page
 
-#### Reusable Components
+#### Navigation Flow
 
-**Market Components:**
-- `MarketOverview.tsx` - Main indices (S&P 500, NASDAQ, etc.)
-- `MarketQuotes.tsx` - Quotation list
-- `StockHeatmap.tsx` - Interactive D3.js heatmap
-- `MarketNews.tsx` - News feed
+```
+┌─ Unauthenticated User
+│  └─ Accessible: /sign-in, /sign-up
+│
+└─ Authenticated User
+   ├─ /                 (Dashboard home)
+   ├─ /dashboard        (Dashboard)
+   ├─ /search           (Stock search)
+   ├─ /watchlist        (Watchlist)
+   ├─ /prediction       (Predictions)
+   ├─ /settings         (Settings)
+   │
+   └─ Admin Only (if isAdmin = true)
+      └─ /admin         (Admin panel)
+         ├─ /admin/users
+         ├─ /admin/alerts
+         ├─ /admin/data
+         ├─ /admin/models
+         ├─ /admin/reports
+         ├─ /admin/settings
+         └─ /admin/stats
+```
 
-**Form Components:**
-- `InputField.tsx` - Text input
-- `SelectField.tsx` - Selection
-- `CountrySelectField.tsx` - Country selection
+#### Key Components
 
-**UI Components (Radix UI):**
-- `button.tsx`, `input.tsx`, `dialog.tsx`
-- `dropdown-menu.tsx`, `popover.tsx`
-- `card.tsx`, `label.tsx`, `select.tsx`, `avatar.tsx`, `command.tsx`
+**AuthGuard Component**
+```
+Responsibility: Protect routes and redirect unauthenticated users
 
-**Navigation Components:**
-- `Header.tsx` - Header with navigation
-- `Sidebar.tsx` - Side navigation
-- `AdminSidebar.tsx` - Admin navigation
+Flow:
+├─ Check if user is authenticated
+├─ Retrieve JWT token from storage
+├─ Redirect to /sign-in if not authenticated
+└─ Render content if authenticated
+```
 
-**Advanced Components:**
-- `StockChart.tsx` - Charts with Recharts
-- `LineChart.tsx` - Line charts
-- `TradingViewWidget.tsx` - Integrated TradingView widget
-- `Logo.tsx`, `UserDropdown.tsx`
+**Header Component**
+```
+Responsibility: Main application header
+
+Features:
+├─ App logo
+├─ Stock search bar
+├─ Notifications
+└─ User dropdown menu
+```
+
+**Sidebar Component**
+```
+Responsibility: Main navigation for regular users
+
+Navigation:
+├─ Dashboard
+├─ Search
+├─ Watchlist
+├─ Predictions
+└─ Settings
+```
+
+**Market Components**
+
+**MarketOverview:**
+- Displays major market indices (S&P 500, NASDAQ, Dow Jones)
+- Real-time price updates
+- Change indicators
+
+**StockHeatmap:**
+- Interactive D3.js visualization
+- Color-coded performance
+- Sector grouping
+- Tooltips with stock details
+
+**MarketQuotes:**
+- Detailed stock quotations
+- Volume, market cap, PE ratio
+- Real-time updates every 15 seconds
+
+**MarketNews:**
+- Live stock news feed
+- Sentiment analysis
+- News source attribution
 
 #### Custom Hooks
 
@@ -209,18 +485,21 @@ Models:
 - Real-time search across all yfinance symbols
 - Support for any ticker format (1-5 alphanumeric characters)
 - No limitation to S&P 500 only
+- Auto-complete suggestions
 
 **Watchlist Management:**
 - Add/remove any yfinance stock
 - Persistent storage in database
 - Real-time price updates every 15 seconds
 - Support for stocks from any market
+- Drag-and-drop reordering
 
 **Stock Prediction:**
 - AI-powered price predictions using LSTM models
 - Support for any yfinance symbol
 - Multiple time horizons (1-30 days ahead)
 - Historical accuracy metrics
+- Confidence scores
 
 ---
 
@@ -257,7 +536,7 @@ Client                          Backend
 
 ### JWT Token Structure
 
-```
+```json
 {
   "id": 1,
   "email": "user@example.com",
@@ -268,38 +547,52 @@ Client                          Backend
 }
 ```
 
+**Token Properties:**
+- `id`: User's database ID
+- `email`: User's email address
+- `username`: User's display name
+- `isAdmin`: Admin role flag
+- `iat`: Issued at timestamp
+- `exp`: Expiration timestamp (24 hours from issue)
+
 ---
 
 ## 🗄️ DATABASE SCHEMA
 
-### Users Table
+### Database Model (MLD)
+
+<img width="1408" height="768" alt="MLD" src="https://github.com/user-attachments/assets/841aaaaa-c193-4283-ac6e-46ee68410386" />
+
+### Core Models
+
+**User**
 ```sql
 CREATE TABLE "User" (
   id SERIAL PRIMARY KEY,
   email VARCHAR(255) UNIQUE NOT NULL,
   username VARCHAR(255) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  password VARCHAR(255) NOT NULL,        -- bcrypt hashed
+  createdAt TIMESTAMP DEFAULT NOW(),
   lastLogin TIMESTAMP,
   loginCount INT DEFAULT 0,
   isAdmin BOOLEAN DEFAULT false
 );
 ```
 
-### Watchlist Table
+**WatchlistItem**
 ```sql
 CREATE TABLE "WatchlistItem" (
   id SERIAL PRIMARY KEY,
   userId INT NOT NULL,
   symbol VARCHAR(10) NOT NULL,
   companyName VARCHAR(255),
-  addedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (userId) REFERENCES "User"(id),
+  addedAt TIMESTAMP DEFAULT NOW(),
+  FOREIGN KEY (userId) REFERENCES "User"(id) ON DELETE CASCADE,
   UNIQUE(userId, symbol)
 );
 ```
 
-### Predictions Table
+**UserPrediction**
 ```sql
 CREATE TABLE "UserPrediction" (
   id SERIAL PRIMARY KEY,
@@ -307,31 +600,56 @@ CREATE TABLE "UserPrediction" (
   symbol VARCHAR(10) NOT NULL,
   companyName VARCHAR(255),
   predictedPrice DECIMAL(10, 2),
-  viewedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (userId) REFERENCES "User"(id)
+  viewedAt TIMESTAMP DEFAULT NOW(),
+  FOREIGN KEY (userId) REFERENCES "User"(id) ON DELETE CASCADE
 );
 ```
 
-### Activity Logs Table
+**ActivityLog**
 ```sql
 CREATE TABLE "ActivityLog" (
   id SERIAL PRIMARY KEY,
   userId INT NOT NULL,
-  action VARCHAR(50) NOT NULL,
+  action VARCHAR(50) NOT NULL,           -- login, view_prediction, add_watchlist, etc.
   details JSON,
-  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (userId) REFERENCES "User"(id)
+  timestamp TIMESTAMP DEFAULT NOW(),
+  FOREIGN KEY (userId) REFERENCES "User"(id) ON DELETE CASCADE
 );
 ```
+
+### Relationships
+
+| Relation | Type | Description |
+|----------|------|-------------|
+| User → WatchlistItem | 1:N | User has many watched stocks |
+| User → UserPrediction | 1:N | User has many predictions |
+| User → ActivityLog | 1:N | User has many activity logs |
+
+**Cascade Delete:** When User deleted → all related data deleted
 
 ---
 
 ## 📡 API ENDPOINTS
 
+### Authentication
+
+```http
+POST /auth/sign-up
+Body: { "email": "user@example.com", "username": "user", "password": "pass123" }
+Response: { "user": {...}, "token": "jwt..." }
+
+POST /auth/sign-in
+Body: { "email": "user@example.com", "password": "pass123" }
+Response: { "user": {...}, "token": "jwt..." }
+
+POST /auth/verify
+Headers: Authorization: Bearer <token>
+Response: { "valid": true, "user": {...} }
+```
+
 ### Market Data
 
-**Get Market Overview**
-```
+```http
 GET /api/market/overview
 Response: {
   "indices": [
@@ -344,14 +662,9 @@ Response: {
     }
   ]
 }
-```
 
-**Get Stock Quotes**
-```
 POST /api/market/quotes
-Body: {
-  "symbols": ["AAPL", "MSFT", "GOOGL"]
-}
+Body: { "symbols": ["AAPL", "MSFT", "GOOGL"] }
 Response: [
   {
     "symbol": "AAPL",
@@ -362,10 +675,7 @@ Response: [
     "volume": 52134567
   }
 ]
-```
 
-**Get Stock Heatmap**
-```
 GET /api/market/heatmap
 Response: [
   {
@@ -376,14 +686,74 @@ Response: [
     "sector": "Technology"
   }
 ]
+
+GET /api/market/news
+Response: {
+  "news": [
+    {
+      "headline": "Apple announces new product line",
+      "summary": "Apple Inc. revealed...",
+      "source": "Reuters",
+      "sentiment": "positive"
+    }
+  ]
+}
 ```
 
-### User Management
+### Watchlist
 
-**List All Users (Admin)**
+```http
+GET /watchlist
+Headers: Authorization: Bearer <token>
+Response: [
+  {
+    "id": 1,
+    "userId": 1,
+    "symbol": "AAPL",
+    "companyName": "Apple Inc.",
+    "addedAt": "2024-12-14T10:00:00Z"
+  }
+]
+
+POST /watchlist
+Headers: Authorization: Bearer <token>
+Body: { "symbol": "AAPL", "companyName": "Apple Inc." }
+Response: { "id": 1, "userId": 1, "symbol": "AAPL", ... }
+
+DELETE /watchlist/:id
+Headers: Authorization: Bearer <token>
+Response: { "success": true }
 ```
+
+### Predictions
+
+```http
+GET /predictions/:symbol
+Headers: Authorization: Bearer <token>
+Response: {
+  "symbol": "AAPL",
+  "predictedPrice": 185.50,
+  "confidence": 0.87,
+  "timeframe": "7 days"
+}
+
+GET /predictions/history
+Headers: Authorization: Bearer <token>
+Response: [
+  {
+    "id": 1,
+    "symbol": "AAPL",
+    "predictedPrice": 185.50,
+    "viewedAt": "2024-12-14T15:30:00Z"
+  }
+]
+```
+
+### User Management (Admin)
+
+```http
 GET /admin/users
-Headers: { Authorization: "Bearer <token>" }
+Headers: Authorization: Bearer <admin-token>
 Response: [
   {
     "id": 1,
@@ -395,12 +765,9 @@ Response: [
     "loginCount": 5
   }
 ]
-```
 
-**Get User Statistics (Admin)**
-```
 GET /admin/users/:id/stats
-Headers: { Authorization: "Bearer <token>" }
+Headers: Authorization: Bearer <admin-token>
 Response: {
   "watchlistItems": 15,
   "predictions": 8,
@@ -408,32 +775,153 @@ Response: {
 }
 ```
 
+### Activity Logs
+
+```http
+GET /activity-logs
+Headers: Authorization: Bearer <token>
+Response: [
+  {
+    "id": 1,
+    "userId": 1,
+    "action": "login",
+    "details": "{\"ip\":\"192.168.1.1\"}",
+    "timestamp": "2024-12-14T15:30:00Z"
+  }
+]
+
+POST /activity-logs
+Headers: Authorization: Bearer <token>
+Body: { "action": "add_watchlist", "details": "{\"symbol\":\"AAPL\"}" }
+Response: { "id": 3, "action": "add_watchlist", ... }
+```
+
+---
+
+## 🔄 DATA FLOW
+
+### Authentication Flow
+
+```
+SIGN-UP                           SIGN-IN
+Frontend                          Frontend
+   │ POST /auth/sign-up              │ POST /auth/sign-in
+   ▼                                 ▼
+Backend                           Backend
+   │ 1. Validate data                │ 1. Find user by email
+   │ 2. Hash password                │ 2. Compare password
+   │ 3. Create user                  │ 3. Generate JWT
+   │ 4. Generate JWT                 │ 4. Update lastLogin
+   ▼                                 ▼
+Database                          Database
+   │ INSERT User                     │ UPDATE User
+   ▼                                 ▼
+Frontend                          Frontend
+   │ Store JWT                       │ Store JWT
+   └─ Redirect /dashboard            └─ Redirect /dashboard
+```
+
+### Complete User Journey Example
+
+```
+═══════════════════════════════════════════════════════════
+NEW USER VIEWS STOCK PREDICTION
+═══════════════════════════════════════════════════════════
+
+1. REGISTER
+   Frontend → POST /auth/sign-up → Backend
+   Backend  → Create User (id: 1) → Database
+   Backend  → Return JWT → Frontend
+   
+2. ADD TO WATCHLIST
+   Frontend → POST /watchlist {symbol: "AAPL"} → Backend
+   Backend  → Validate JWT (userId=1)
+   Backend  → INSERT watchlist_items → Database
+   Backend  → INSERT activity_logs → Database
+   
+3. REQUEST PREDICTION
+   Frontend → GET /predictions/AAPL → Backend
+   Backend  → Fetch historical data → Yahoo Finance
+   Backend  → POST to ML API → FastAPI
+   ML API   → Run LSTM model
+   ML API   → Return {price: 185.50, confidence: 0.87}
+   Backend  → INSERT user_predictions → Database
+   Backend  → INSERT activity_logs → Database
+   Frontend ← Display prediction
+
+FINAL DATABASE STATE:
+Users: 1 row (john@email.com)
+WatchlistItems: 1 row (AAPL)
+UserPredictions: 1 row (AAPL: $185.50)
+ActivityLogs: 2 rows (add_watchlist, view_prediction)
+```
+
 ---
 
 ## 🚀 DEPLOYMENT
 
-### Docker Deployment
-
-The project includes Docker Compose configuration for complete containerization:
+### Docker Architecture
 
 ```yaml
 Services:
-- frontend: Next.js application (port 3000)
-- backend: Express.js API (port 4000)
-- prediction-api: FastAPI ML service (port 8000)
-- postgres: PostgreSQL database (port 5432)
+├─ frontend (Next.js) - Port 3000
+├─ backend (Express) - Port 4000  
+├─ ml (FastAPI) - Port 8000
+├─ postgres (PostgreSQL) - Port 5432
+└─ redis (Redis) - Port 6379 [optional]
+
+Network: stocknex-network (bridge)
 ```
 
 ### Production Checklist
 
-- [ ] Environment variables configured
-- [ ] Database migrations applied
-- [ ] SSL/TLS certificates configured
-- [ ] Database backups scheduled
-- [ ] Monitoring and logging set up
-- [ ] Rate limiting enabled
-- [ ] CORS properly configured
-- [ ] Security headers added
+**Environment**
+- [ ] Set `NODE_ENV=production`
+- [ ] Configure `DATABASE_URL`, `JWT_SECRET`
+- [ ] Set API URLs for frontend/backend/ML
+
+**Database**
+- [ ] Run migrations: `npx prisma migrate deploy`
+- [ ] Configure automated backups
+- [ ] Enable connection pooling
+
+**Security**
+- [ ] Enable SSL/TLS certificates (Let's Encrypt)
+- [ ] Configure CORS whitelist
+- [ ] Add security headers (CSP, HSTS, X-Frame-Options)
+- [ ] Implement rate limiting
+- [ ] Configure firewall rules
+
+**Monitoring**
+- [ ] Set up error tracking (e.g., Sentry)
+- [ ] Configure application monitoring
+- [ ] Enable access/error logs
+- [ ] Set up alerts for critical errors
+
+**Performance**
+- [ ] Enable Redis caching
+- [ ] Configure CDN for static assets
+- [ ] Optimize database indexes
+- [ ] Enable gzip compression
+
+### Docker Commands
+
+```bash
+# Build and start all services
+docker-compose up -d --build
+
+# View logs
+docker-compose logs -f [service-name]
+
+# Stop all services
+docker-compose down
+
+# Run database migrations
+docker-compose exec backend npx prisma migrate deploy
+
+# Rebuild specific service
+docker-compose up -d --build frontend
+```
 
 ---
 
@@ -441,27 +929,60 @@ Services:
 
 ### Code Style
 
-- Use TypeScript for all backend code
-- Use React functional components with hooks
-- Follow ESLint rules
-- Use Prettier for code formatting
+**TypeScript**
+- Use strict mode with explicit types
+- Avoid `any` - use `unknown` or proper types
+- Define interfaces for object shapes
 
-### Commit Messages
+**React**
+- Functional components with hooks
+- Single responsibility principle
+- Extract reusable logic to custom hooks
 
+**Naming Conventions**
+- Components: PascalCase (`UserProfile.tsx`)
+- Utils: camelCase (`formatDate.ts`)
+- Constants: UPPER_SNAKE_CASE (`API_BASE_URL`)
+- Hooks: camelCase with `use` prefix (`useAuth.ts`)
+
+**Formatting**
+- ESLint + Prettier
+- 2 spaces indentation
+- Single quotes
+- Max line length: 100 characters
+
+### Git Workflow
+
+**Commit Format:**
 ```
-Feature: Add new feature description
-Fix: Bug fix description
-Docs: Documentation update
-Style: Code style changes
-Refactor: Code refactoring
-Test: Add tests
-Chore: Maintenance tasks
+<type>: <subject>
+
+<body>
 ```
+
+**Types:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`
+
+**Examples:**
+```
+feat: add stock price prediction feature
+
+Implemented LSTM-based model for predicting stock prices.
+Added new endpoint /predictions/:symbol and integrated
+with ML API service.
+
+Closes #123
+```
+
+**Branch Naming:**
+- `feature/feature-name` - New features
+- `fix/bug-description` - Bug fixes
+- `refactor/component-name` - Refactoring
+- `docs/update-readme` - Documentation
 
 ### Testing
 
 ```bash
-# Run tests
+# Run all tests
 npm test
 
 # Run with coverage
@@ -469,20 +990,69 @@ npm test -- --coverage
 
 # Watch mode
 npm test -- --watch
+
+# Specific test file
+npm test -- UserProfile.test.tsx
+```
+
+### Database Migrations
+
+```bash
+# Create migration
+npx prisma migrate dev --name description_of_changes
+
+# Apply to production
+npx prisma migrate deploy
+
+# Reset database (development only)
+npx prisma migrate reset
+```
+
+### Environment Variables
+
+**Frontend (.env.local)**
+```
+NEXT_PUBLIC_API_URL=http://localhost:4000
+NEXT_PUBLIC_ML_API_URL=http://localhost:8000
+```
+
+**Backend (.env)**
+```
+DATABASE_URL=postgresql://user:password@localhost:5432/stocknex
+JWT_SECRET=your-super-secret-jwt-key-change-in-production
+PORT=4000
+NODE_ENV=development
+REDIS_URL=redis://localhost:6379
+YAHOO_FINANCE_API_KEY=your-api-key
+FINNHUB_API_KEY=your-api-key
 ```
 
 ---
 
 ## 📚 ADDITIONAL RESOURCES
 
-- [Next.js Documentation](https://nextjs.org)
+### Documentation
+- [Next.js Documentation](https://nextjs.org/docs)
 - [React Documentation](https://react.dev)
 - [Express.js Documentation](https://expressjs.com)
 - [Prisma Documentation](https://www.prisma.io/docs)
 - [PostgreSQL Documentation](https://www.postgresql.org/docs)
 - [Docker Documentation](https://docs.docker.com)
+- [FastAPI Documentation](https://fastapi.tiangolo.com)
+
+### External APIs
+- [Yahoo Finance API](https://finance.yahoo.com)
+- [Finnhub API Documentation](https://finnhub.io/docs/api)
+- [TradingView Widget Documentation](https://www.tradingview.com/widget/)
+
+### Tools & Libraries
+- [Radix UI Components](https://www.radix-ui.com)
+- [Recharts Documentation](https://recharts.org)
+- [D3.js Documentation](https://d3js.org)
+- [Lucide Icons](https://lucide.dev)
 
 ---
 
-**Last Updated:** December 14, 2024
-**Version:** 1.0.0
+**Last Updated:** February 2026  
+**Version:** 2.0.0  
+**Maintained By:** StockNex Development Team

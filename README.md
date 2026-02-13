@@ -28,27 +28,24 @@
   <img src="https://img.shields.io/badge/Optuna-4.6-3E8E9B?logo=optuna&logoColor=white">
   <img src="https://img.shields.io/badge/scikit--learn-1.7-F7931E?logo=scikit-learn&logoColor=white">
   <br>
-  <!-- Infrastructure -->
-  <img src="https://img.shields.io/badge/Docker-24.0-2496ED?logo=docker&logoColor=white">
-  <img src="https://img.shields.io/badge/Docker_Compose-2.23-2496ED?logo=docker&logoColor=white">
-  <img src="https://img.shields.io/badge/yFinance-0.2-005F73?logo=yahoo&logoColor=white">
-  <br>
   <!-- Data Science Stack -->
   <img src="https://img.shields.io/badge/Pandas-2.3-150458?logo=pandas&logoColor=white">
   <img src="https://img.shields.io/badge/NumPy-2.3-013243?logo=numpy&logoColor=white">
   <img src="https://img.shields.io/badge/Keras-3.8-D00000?logo=keras&logoColor=white">
   <br>
-  <!-- Visualization -->
-  <img src="https://img.shields.io/badge/D3.js-7.8-F9A03C?logo=d3.js&logoColor=white">
-  <img src="https://img.shields.io/badge/Recharts-2.12-22B5BF?logo=recharts&logoColor=white">
-  <img src="https://img.shields.io/badge/Radix_UI-Latest-161618?logo=radix-ui&logoColor=white">
+  <!-- Infrastructure -->
+  <img src="https://img.shields.io/badge/Docker-24.0-2496ED?logo=docker&logoColor=white">
+  <img src="https://img.shields.io/badge/Docker_Compose-2.23-2496ED?logo=docker&logoColor=white">
+  <img src="https://img.shields.io/badge/yFinance-0.2-005F73?logo=yahoo&logoColor=white">
+  <br>
+  
 </p>
 
 <p align="center">
-  <a href="#-the-innovation">Innovation</a> •
+  <a href="#-the-stockNex-difference">The StockNex Difference</a> •
   <a href="#-key-features">Features</a> •
   <a href="#-quick-start">Quick Start</a> •
-  <a href="#-documentation">Documentation Suite</a>
+  <a href="#-documentation-suite">Documentation Suite</a>
 </p>
 
 ---
@@ -62,8 +59,6 @@ Most prediction systems train a single model on thousands of stocks, forcing App
 **StockNex does the opposite.**
 
 <p align="center">
-  <img src="screenshots/innovation-visual.png" alt="Specialized Models Concept" width="700">
-  <br>
   <em>Each S&P 500 company receives its own dedicated LSTM network, optimized for its unique volatility profile</em>
 </p>
 
@@ -104,7 +99,7 @@ Most prediction systems train a single model on thousands of stocks, forcing App
 <p align="center">
   <img width="1843" height="959" alt="image" src="https://github.com/user-attachments/assets/ad9b95f6-2c16-46d7-9793-801deb95e75f" />
   <br>
-  <em>LSTM-generated forecast with confidence bands and trend indicators</em>
+  <em>LSTM-generated forecast</em>
 </p>
 
 ### 👤 User Experience
@@ -173,9 +168,27 @@ The result is a **living prediction system** that adapts as markets adapt.
 | Document | Description |
 |----------|-------------|
 | **[📘 Technical Documentation](DOCUMENTATION.md)** | Complete architecture, API endpoints, database schema, deployment |
-| **[🤖 ML Pipeline Documentation](STOCK-PREDICTION-API.md)** | LSTM architecture, Optuna tuning, model persistence, inference |
-| **[🔐 Admin Guide](ADMIN-SETUP.md)** | Role configuration, security policies, maintenance |
-| **[⚡ Create Admin Quickstart](CREATE-ADMIN-QUICKSTART.md)** | Fastest path to first admin user |
+| **[🤖 ML Pipeline Documentation](stock-prediction-api/README.md)** | LSTM architecture, Optuna tuning, model persistence, inference |
+| **[🔐 Admin Guide](ADMIN_GUIDE.md)** | Admin creation, Role configuration, security policies, maintenance |
+
+---
+
+---
+
+## 🙏 Acknowledgments
+
+### Academic Supervision
+This research was conducted under the supervision of **Mr. El Moukhtar ZEMMOURI** and **Mr. Abdessamad OUSAADANE**, whose expertise in software development, machine learning, and quantitative finance guided the architecture, methodology, and analysis presented in this study.
+
+### Data & Tools
+- **Yahoo Finance**: For providing accessible and reliable financial data through their public API
+- **Open-Source Community**: For developing and maintaining essential Python libraries including:
+  - **Data manipulation**: pandas, numpy
+  - **Machine learning and optimization**: TensorFlow/Keras, scikit-learn, optuna
+  - **Visualization**: matplotlib, seaborn
+  - **Web frameworks**: FastAPI, Next.js, Express.js, React.js
+  - **Database**: PostgreSQL, Prisma
+  - **Containerization**: Docker
 
 ---
 
@@ -183,7 +196,7 @@ The result is a **living prediction system** that adapts as markets adapt.
 
 ## 🤝 Contributing
 
-We welcome contributions from the community. See our [Contributing Guide](CONTRIBUTING.md) to get started.
+We welcome contributions from the community.
 
 **Areas we need help with:**
 - Additional ML models (Transformers, XGBoost ensembles)
@@ -200,14 +213,7 @@ MIT License — free for personal and commercial use.
 ---
 
 <p align="center">
-  <strong>Built with ❤️ for traders, quants, and market enthusiasts</strong>
-  <br>
-  <br>
-  <a href="#-the-innovation">Innovation</a> •
-  <a href="#-key-features">Features</a> •
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-documentation">Documentation</a>
-  <br>
+  <strong>Built by Mohamed Yassir Abouchiba and Abdelali Kholty with ❤️ for traders, quants, and market enthusiasts</strong>
   <br>
   <sub>Version 1.0.0 | Last Updated: February 2026</sub>
 </p>

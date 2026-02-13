@@ -253,7 +253,7 @@ curl -X POST http://localhost:8000/api/predict \
 
 ## ⚡ Performance Notes
 
-- **Training Time**: 2-5 minutes per model
-- **Prediction Time**: < 1 second
+- **Training Time**: minutes per model
+- **Prediction Time**: seconds
 - **Memory**: Optimized for single company models
 - **Storage**: Models persist in container volume
