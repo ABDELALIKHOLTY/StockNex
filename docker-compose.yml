@@ -20,6 +20,8 @@ services:
       - 4000:4000
     environment:
       - DATABASE_URL_LOCAL=postgresql://postgres:password@db:5432/postgres?schema=public
+      - JWT_SECRET=Ali@Yassir$StockNex#Prediction2025!Gi-ilsi-Info*Secure
+      - NODE_ENV=production
     depends_on:
       db:
         condition: service_healthy
