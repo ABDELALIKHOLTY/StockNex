@@ -101,8 +101,8 @@ export class CacheService {
 export const cacheService = new CacheService();
 
 // Configure default TTLs for different cache types
-cacheService.setDefaultTTL('overview', 5 * 60 * 1000); // 5 minutes - reduced API calls
-cacheService.setDefaultTTL('heatmap', 10 * 60 * 1000); // 10 minutes - IMPORTANT to reduce 429 errors
+cacheService.setDefaultTTL('overview', 5 * 60 * 1000); // 5 minutes - reduced API calls 
+cacheService.setDefaultTTL('heatmap', 10 * 60 * 1000); // 10 minutes -
 cacheService.setDefaultTTL('stock:*', 30 * 1000); // 30 seconds
 cacheService.setDefaultTTL('details:*', 30 * 1000); // 30 seconds
 cacheService.setDefaultTTL('historical:*', 60 * 60 * 1000); // 1 hour
