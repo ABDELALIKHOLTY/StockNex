@@ -174,7 +174,7 @@ Ensure the following variables are securely set in your `.env` or `docker-compos
 ADMIN_EMAIL=admin@example.com
 SESSION_TIMEOUT=120
 MAX_LOGIN_ATTEMPTS=5
-JWT_SECRET=your_highly_secure_secret_here
+JWT_SECRET=Ali@Yassir$StockNex#Prediction2025!Gi-ilsi-Info*Secure
 
 ```
 
