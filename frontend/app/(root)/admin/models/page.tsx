@@ -149,7 +149,7 @@ function ModelsPageContent() {
     addAlert({
       type: 'info',
       title: 'Model Training Started',
-      message: `Starting training for ${selectedCompany}. This may take 2-25 minutes...`,
+      message: `Starting training for ${selectedCompany}. This may take minutes...`,
     });
 
     try {
