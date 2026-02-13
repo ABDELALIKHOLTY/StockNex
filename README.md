@@ -181,6 +181,33 @@ The result is a **living prediction system** that adapts as markets adapt.
 
 ---
 
+## 🙏 Acknowledgments
+
+### Academic Supervision
+This research was conducted under the supervision of **Mr. El Moukhtar ZEMMOURI** and **Mr. Abdessamad OUSAADANE**, whose expertise in software development, machine learning, and quantitative finance guided the architecture, methodology, and analysis presented in this study.
+
+### Data & Tools
+- **Yahoo Finance**: For providing accessible and reliable financial data through their public API
+- **Open-Source Community**: For developing and maintaining essential Python libraries including:
+  - **Data manipulation**: pandas, numpy
+  - **Machine learning and optimization**: TensorFlow/Keras, scikit-learn, optuna
+  - **Visualization**: matplotlib, seaborn
+  - **Web frameworks**: FastAPI, Next.js, Express.js, React.js
+  - **Database**: PostgreSQL, Prisma
+  - **Containerization**: Docker
+
+---
+
+<p align="center">
+  <sub>This project was developed as part of the academic curriculum at [University Name].</sub>
+</p>
+
+---
+
+Want me to adjust anything else?
+
+---
+
 ## 🤝 Contributing
 
 We welcome contributions from the community. See our [Contributing Guide](CONTRIBUTING.md) to get started.
