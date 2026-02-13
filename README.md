@@ -38,10 +38,6 @@
   <img src="https://img.shields.io/badge/NumPy-2.3-013243?logo=numpy&logoColor=white">
   <img src="https://img.shields.io/badge/Keras-3.8-D00000?logo=keras&logoColor=white">
   <br>
-  <!-- Visualization -->
-  <img src="https://img.shields.io/badge/D3.js-7.8-F9A03C?logo=d3.js&logoColor=white">
-  <img src="https://img.shields.io/badge/Recharts-2.12-22B5BF?logo=recharts&logoColor=white">
-  <img src="https://img.shields.io/badge/Radix_UI-Latest-161618?logo=radix-ui&logoColor=white">
 </p>
 
 <p align="center">
@@ -102,7 +98,7 @@ Most prediction systems train a single model on thousands of stocks, forcing App
 <p align="center">
   <img width="1843" height="959" alt="image" src="https://github.com/user-attachments/assets/ad9b95f6-2c16-46d7-9793-801deb95e75f" />
   <br>
-  <em>LSTM-generated forecast with confidence bands and trend indicators</em>
+  <em>LSTM-generated forecast</em>
 </p>
 
 ### 👤 User Experience
