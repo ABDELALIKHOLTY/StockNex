@@ -1,4 +1,4 @@
-
+https://file+.vscode-resource.vscode-cdn.net/home/yass/Downloads/stocknex-final/StockNex-main/frontend/public/assets/logo.svg?version%3D1771001772373
 
 <p align="center">
   <img src="screenshots/stocknex-logo.png" alt="StockNex Logo" width="400">
