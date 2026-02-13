@@ -28,23 +28,24 @@
   <img src="https://img.shields.io/badge/Optuna-4.6-3E8E9B?logo=optuna&logoColor=white">
   <img src="https://img.shields.io/badge/scikit--learn-1.7-F7931E?logo=scikit-learn&logoColor=white">
   <br>
-  <!-- Infrastructure -->
-  <img src="https://img.shields.io/badge/Docker-24.0-2496ED?logo=docker&logoColor=white">
-  <img src="https://img.shields.io/badge/Docker_Compose-2.23-2496ED?logo=docker&logoColor=white">
-  <img src="https://img.shields.io/badge/yFinance-0.2-005F73?logo=yahoo&logoColor=white">
-  <br>
   <!-- Data Science Stack -->
   <img src="https://img.shields.io/badge/Pandas-2.3-150458?logo=pandas&logoColor=white">
   <img src="https://img.shields.io/badge/NumPy-2.3-013243?logo=numpy&logoColor=white">
   <img src="https://img.shields.io/badge/Keras-3.8-D00000?logo=keras&logoColor=white">
   <br>
+  <!-- Infrastructure -->
+  <img src="https://img.shields.io/badge/Docker-24.0-2496ED?logo=docker&logoColor=white">
+  <img src="https://img.shields.io/badge/Docker_Compose-2.23-2496ED?logo=docker&logoColor=white">
+  <img src="https://img.shields.io/badge/yFinance-0.2-005F73?logo=yahoo&logoColor=white">
+  <br>
+  
 </p>
 
 <p align="center">
-  <a href="#-the-innovation">Innovation</a> •
+  <a href="#-the-stockNex-difference">The StockNex Difference</a> •
   <a href="#-key-features">Features</a> •
   <a href="#-quick-start">Quick Start</a> •
-  <a href="#-documentation">Documentation Suite</a>
+  <a href="#-documentation-suite">Documentation Suite</a>
 </p>
 
 ---
