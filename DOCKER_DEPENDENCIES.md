@@ -78,7 +78,7 @@ NODE_ENV=production
 ```env
 DATABASE_URL=postgresql://postgres:password@db:5432/postgres?schema=public
 NODE_ENV=production
-JWT_SECRET=your_secret_key
+JWT_SECRET=Ali@Yassir$StockNex#Prediction2025!Gi-ilsi-Info*Secure
 ```
 
 #### Volumes
