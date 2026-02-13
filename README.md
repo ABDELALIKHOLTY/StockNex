@@ -1,7 +1,5 @@
-
-
 <p align="center">
-  <img src="screenshots/stocknex-logo.png" alt="StockNex Logo" width="400">
+  <img src="frontend/public/assets/logo.svg" alt="StockNex Logo" width="400">
 </p>
 
 <h1 align="center">StockNex – Adaptive Stock Market Prediction Platform</h1>
@@ -55,7 +53,7 @@
 
 ---
 
-## 🎯 The Innovation
+## ⚡ The StockNex Difference
 
 **StockNex redefines financial forecasting by rejecting the "one-model-fits-all" paradigm.**
 
@@ -92,7 +90,7 @@ Most prediction systems train a single model on thousands of stocks, forcing App
 - **Curated News Feed** – Financial headlines with sentiment correlation
 
 <p align="center">
-  <img src="screenshots/dashboard-full.png" alt="StockNex Dashboard" width="800">
+  <img width="1655" height="870" alt="image" src="https://github.com/user-attachments/assets/c9b88684-7157-4ad9-be28-8ea18c464be5" />
   <br>
   <em>Complete market overview with indices, heatmap, and news</em>
 </p>
@@ -104,7 +102,7 @@ Most prediction systems train a single model on thousands of stocks, forcing App
 - **Full S&P 500 Coverage** – 500+ specialized models ready for inference
 
 <p align="center">
-  <img src="screenshots/prediction-interface.png" alt="Prediction Interface" width="800">
+  <img width="1843" height="959" alt="image" src="https://github.com/user-attachments/assets/ad9b95f6-2c16-46d7-9793-801deb95e75f" />
   <br>
   <em>LSTM-generated forecast with confidence bands and trend indicators</em>
 </p>
@@ -122,7 +120,7 @@ Most prediction systems train a single model on thousands of stocks, forcing App
 - **Audit Trail** – Complete visibility into user activity and prediction views
 
 <p align="center">
-  <img src="screenshots/admin-panel.png" alt="Admin Control Panel" width="800">
+  <img width="1908" height="959" alt="image" src="https://github.com/user-attachments/assets/1b6379d6-abcd-42e3-a84a-752fda638817" />
   <br>
   <em>Administrator dashboard with system metrics and model controls</em>
 </p>
@@ -149,35 +147,6 @@ open http://localhost:3000
 **[⬇️ Download Docker](https://docs.docker.com/get-docker/)** | **[📖 Full Installation Guide](DOCUMENTATION.md#-deployment)**
 
 ---
-
-## 📸 Screenshots
-
-<details>
-<summary><strong>🖥️ Click to expand screenshot gallery</strong></summary>
-
-<br>
-
-| Dashboard | Stock Analysis |
-|-----------|---------------|
-| <img src="screenshots/dashboard-1.png" width="400"> | <img src="screenshots/stock-detail.png" width="400"> |
-| *Real-time S&P 500 overview* | *Historical data with technical indicators* |
-
-| Prediction Interface | Watchlist |
-|---------------------|-----------|
-| <img src="screenshots/prediction-1.png" width="400"> | <img src="screenshots/watchlist.png" width="400"> |
-| *LSTM forecast with 15-day horizon* | *Personal stock tracking with alerts* |
-
-| Admin Panel | Model Management |
-|-------------|------------------|
-| <img src="screenshots/admin-users.png" width="400"> | <img src="screenshots/model-training.png" width="400"> |
-| *User administration interface* | *Hyperparameter configuration interface* |
-
-| Mobile View | Dark Mode |
-|------------|-----------|
-| <img src="screenshots/mobile.png" width="300"> | <img src="screenshots/dark-mode.png" width="400"> |
-| *Responsive design* | *Theme customization* |
-
-</details>
 
 ---
 
