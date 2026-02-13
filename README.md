@@ -216,13 +216,6 @@ MIT License — free for personal and commercial use.
 <p align="center">
   <strong>Built by Mohamed Yassir Abouchiba and Abdelali Kholty with ❤️ for traders, quants, and market enthusiasts</strong>
   <br>
-  <br>
-  <a href="#-the-innovation">Innovation</a> •
-  <a href="#-key-features">Features</a> •
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-documentation">Documentation</a>
-  <br>
-  <br>
   <sub>Version 1.0.0 | Last Updated: February 2026</sub>
 </p>
 
