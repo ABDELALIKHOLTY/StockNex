@@ -53,7 +53,7 @@
 
 ---
 
-## 🎯 The Innovation
+## ⚡ The StockNex Difference
 
 **StockNex redefines financial forecasting by rejecting the "one-model-fits-all" paradigm.**
 
@@ -147,35 +147,6 @@ open http://localhost:3000
 **[⬇️ Download Docker](https://docs.docker.com/get-docker/)** | **[📖 Full Installation Guide](DOCUMENTATION.md#-deployment)**
 
 ---
-
-## 📸 Screenshots
-
-<details>
-<summary><strong>🖥️ Click to expand screenshot gallery</strong></summary>
-
-<br>
-
-| Dashboard | Stock Analysis |
-|-----------|---------------|
-| <img src="screenshots/dashboard-1.png" width="400"> | <img src="screenshots/stock-detail.png" width="400"> |
-| *Real-time S&P 500 overview* | *Historical data with technical indicators* |
-
-| Prediction Interface | Watchlist |
-|---------------------|-----------|
-| <img src="screenshots/prediction-1.png" width="400"> | <img src="screenshots/watchlist.png" width="400"> |
-| *LSTM forecast with 15-day horizon* | *Personal stock tracking with alerts* |
-
-| Admin Panel | Model Management |
-|-------------|------------------|
-| <img src="screenshots/admin-users.png" width="400"> | <img src="screenshots/model-training.png" width="400"> |
-| *User administration interface* | *Hyperparameter configuration interface* |
-
-| Mobile View | Dark Mode |
-|------------|-----------|
-| <img src="screenshots/mobile.png" width="300"> | <img src="screenshots/dark-mode.png" width="400"> |
-| *Responsive design* | *Theme customization* |
-
-</details>
 
 ---
 
