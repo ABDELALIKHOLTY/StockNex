@@ -9,9 +9,13 @@ RUN for i in 1 2 3; do apk update && apk add --no-cache openssl && break || slee
 COPY package*.json ./
 COPY tsconfig.json ./
 COPY prisma ./prisma/
+COPY .env ./
 
-# Installer les dépendances
-RUN npm ci
+# Installer les dépendances avec retries
+RUN npm config set fetch-timeout 60000 && \
+    npm config set fetch-retry-mintimeout 20000 && \
+    npm config set fetch-retry-maxtimeout 120000 && \
+    for i in 1 2 3; do npm ci && break || (sleep 10 && false); done
 
 # Copier le reste du code source
 COPY src ./src/
