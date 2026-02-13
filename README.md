@@ -169,8 +169,7 @@ The result is a **living prediction system** that adapts as markets adapt.
 |----------|-------------|
 | **[📘 Technical Documentation](DOCUMENTATION.md)** | Complete architecture, API endpoints, database schema, deployment |
 | **[🤖 ML Pipeline Documentation](stock-prediction-api/README.md)** | LSTM architecture, Optuna tuning, model persistence, inference |
-| **[🔐 Admin Guide](ADMIN-SETUP.md)** | Role configuration, security policies, maintenance |
-| **[⚡ Create Admin Quickstart](CREATE-ADMIN-QUICK_START.md)** | Fastest path to first admin user |
+| **[🔐 Admin Guide](ADMIN_GUIDE.md)** | Admin creation, Role configuration, security policies, maintenance |
 
 ---
 
