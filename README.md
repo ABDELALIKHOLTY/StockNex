@@ -62,8 +62,6 @@ Most prediction systems train a single model on thousands of stocks, forcing App
 **StockNex does the opposite.**
 
 <p align="center">
-  <img src="screenshots/innovation-visual.png" alt="Specialized Models Concept" width="700">
-  <br>
   <em>Each S&P 500 company receives its own dedicated LSTM network, optimized for its unique volatility profile</em>
 </p>
 
@@ -173,9 +171,9 @@ The result is a **living prediction system** that adapts as markets adapt.
 | Document | Description |
 |----------|-------------|
 | **[📘 Technical Documentation](DOCUMENTATION.md)** | Complete architecture, API endpoints, database schema, deployment |
-| **[🤖 ML Pipeline Documentation](STOCK-PREDICTION-API.md)** | LSTM architecture, Optuna tuning, model persistence, inference |
+| **[🤖 ML Pipeline Documentation](stock-prediction-api/README.md)** | LSTM architecture, Optuna tuning, model persistence, inference |
 | **[🔐 Admin Guide](ADMIN-SETUP.md)** | Role configuration, security policies, maintenance |
-| **[⚡ Create Admin Quickstart](CREATE-ADMIN-QUICKSTART.md)** | Fastest path to first admin user |
+| **[⚡ Create Admin Quickstart](CREATE-ADMIN-QUICK_START.md)** | Fastest path to first admin user |
 
 ---
 
@@ -198,19 +196,11 @@ This research was conducted under the supervision of **Mr. El Moukhtar ZEMMOURI*
 
 ---
 
-<p align="center">
-  <sub>This project was developed as part of the academic curriculum at [University Name].</sub>
-</p>
-
----
-
-Want me to adjust anything else?
-
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions from the community. See our [Contributing Guide](CONTRIBUTING.md) to get started.
+We welcome contributions from the community.
 
 **Areas we need help with:**
 - Additional ML models (Transformers, XGBoost ensembles)
@@ -227,7 +217,7 @@ MIT License — free for personal and commercial use.
 ---
 
 <p align="center">
-  <strong>Built with ❤️ for traders, quants, and market enthusiasts</strong>
+  <strong>Built by Mohamed Yassir Abouchiba and Abdelali Kholty with ❤️ for traders, quants, and market enthusiasts</strong>
   <br>
   <br>
   <a href="#-the-innovation">Innovation</a> •
