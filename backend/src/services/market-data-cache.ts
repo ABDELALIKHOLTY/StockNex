@@ -77,7 +77,7 @@ class MarketDataCache {
 
     // Popular stocks across sectors
     const sectorStocks = {
-      'Technology': ['AAPL', 'MSFT', 'GOOGL', 'NVDA', 'META', 'AVGO', 'ORCL', 'CRM', 'ADBE', 'AMD', 'CSCO', 'ACN', 'IBM', 'INTU', 'TXN', 'QCOM', 'AMAT', 'MU', 'INTC', 'ADI'],
+      'Technology': ['AAPL', 'MSFT', 'GOOGL', 'NVDA', 'META',  'AMZN','AVGO', 'ORCL', 'CRM', 'ADBE', 'AMD', 'CSCO', 'ACN', 'IBM', 'INTU', 'TXN', 'QCOM', 'AMAT', 'MU', 'INTC', 'ADI'],
       'Financials': ['JPM', 'BAC', 'WFC', 'GS', 'MS', 'BLK', 'AXP', 'COF', 'USB', 'PNC', 'TFC', 'BK', 'CM', 'BMO', 'TD', 'SCHW', 'ICE', 'CME', 'CBOE', 'PFG'],
       'Healthcare': ['JNJ', 'UNH', 'PFE', 'MRK', 'AZN', 'BMY', 'AMGN', 'ABT', 'GILD', 'BIIB', 'REGN', 'ILMN', 'VRTX', 'EXAS', 'ALGN', 'DXCM', 'VEEV', 'FLWS', 'MTCH', 'HALO'],
       'Consumer Discretionary': ['HD', 'MCD', 'NKE', 'LOW', 'SBUX', 'TJX', 'BKNG', 'ABNB', 'CMG', 'MAR', 'HLT', 'ORLY', 'AZO', 'YUM', 'ROST', 'DHI', 'LEN', 'PHM', 'NVR', 'POOL'],
