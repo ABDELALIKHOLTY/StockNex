@@ -1,7 +1,5 @@
-https://file+.vscode-resource.vscode-cdn.net/home/yass/Downloads/stocknex-final/StockNex-main/frontend/public/assets/logo.svg?version%3D1771001772373
-
 <p align="center">
-  <img src="screenshots/stocknex-logo.png" alt="StockNex Logo" width="400">
+  <img src="frontend/public/assets/logo.svg" alt="StockNex Logo" width="400">
 </p>
 
 <h1 align="center">StockNex – Adaptive Stock Market Prediction Platform</h1>
