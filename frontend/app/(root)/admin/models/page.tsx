@@ -153,7 +153,7 @@ function ModelsPageContent() {
     });
 
     try {
-      setTrainingMessage(`🚀 Starting training for ${selectedCompany}...\nThis may take 2-25 minutes`);
+      setTrainingMessage(`🚀 Starting training for ${selectedCompany}...\nThis may take minutes`);
 
       const response = await fetch('/admin/models/api/train', {
         method: 'POST',
