@@ -25,13 +25,13 @@
   <img src="https://img.shields.io/badge/Python-3.9-3776AB?logo=python&logoColor=white">
   <img src="https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white">
   <img src="https://img.shields.io/badge/TensorFlow-2.20-FF6F00?logo=tensorflow&logoColor=white">
-  <img src="https://img.shields.io/badge/Optuna-4.6-3E8E9B?logo=optuna&logoColor=white">
+  <img src="https://img.shields.io/badge/Keras-3.8-D00000?logo=keras&logoColor=white">
   <img src="https://img.shields.io/badge/scikit--learn-1.7-F7931E?logo=scikit-learn&logoColor=white">
   <br>
   <!-- Data Science Stack -->
   <img src="https://img.shields.io/badge/Pandas-2.3-150458?logo=pandas&logoColor=white">
   <img src="https://img.shields.io/badge/NumPy-2.3-013243?logo=numpy&logoColor=white">
-  <img src="https://img.shields.io/badge/Keras-3.8-D00000?logo=keras&logoColor=white">
+  <img src="https://img.shields.io/badge/Optuna-4.6-3E8E9B?logo=optuna&logoColor=white">
   <br>
   <!-- Infrastructure -->
   <img src="https://img.shields.io/badge/Docker-24.0-2496ED?logo=docker&logoColor=white">
