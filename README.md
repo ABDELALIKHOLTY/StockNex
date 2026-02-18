@@ -97,7 +97,9 @@ Most prediction systems train a single model on thousands of stocks, forcing App
 - **Full S&P 500 Coverage** – 500+ specialized models ready for inference
 
 <p align="center">
-  <img width="1843" height="959" alt="image" src="https://github.com/user-attachments/assets/ad9b95f6-2c16-46d7-9793-801deb95e75f" />
+  <img width="1910" height="980" alt="image" src="https://github.com/user-attachments/assets/230c63a1-2b44-44b0-b4bd-5bf387d3dc8f" />
+<img width="1910" height="980" alt="image" src="https://github.com/user-attachments/assets/230c63a1-2b44-44b0-b4bd-5bf387d3dc8f" />
+
   <br>
   <em>LSTM-generated forecast</em>
 </p>
