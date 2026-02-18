@@ -98,8 +98,6 @@ Most prediction systems train a single model on thousands of stocks, forcing App
 
 <p align="center">
   <img width="1910" height="980" alt="image" src="https://github.com/user-attachments/assets/230c63a1-2b44-44b0-b4bd-5bf387d3dc8f" />
-<img width="1910" height="980" alt="image" src="https://github.com/user-attachments/assets/230c63a1-2b44-44b0-b4bd-5bf387d3dc8f" />
-
   <br>
   <em>LSTM-generated forecast</em>
 </p>
