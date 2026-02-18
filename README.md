@@ -90,6 +90,18 @@ Most prediction systems train a single model on thousands of stocks, forcing App
   <em>Complete market overview with indices, heatmap, and news</em>
 </p>
 
+### 📈 Advanced Charting Suite
+> - **Multi-timeframe analysis** – Toggle between 1D, 5D, 1M, 3M, 6M, and 1Y views
+> - **One-click actions** – Add to watchlist or trigger predictions directly from chart
+> - **Live price overlay** – Real-time updates with historical context
+
+<p align="center">
+  <img width="1910" height="980" alt="image" src="https://github.com/user-attachments/assets/b9c1e1a7-657a-4dfd-bb09-c1346bbc6426" />
+  <br>
+  <em>Interactive chart showing price movement with timeframe selector</em>
+</p>
+
+
 ### 🔮 AI Prediction Engine
 - **On-Demand Forecasting** – Generate 1–30 day price predictions instantly
 - **Confidence Intervals** – Statistical uncertainty visualization
