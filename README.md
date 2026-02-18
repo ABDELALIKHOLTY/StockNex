@@ -127,7 +127,7 @@ Most prediction systems train a single model on thousands of stocks, forcing App
 - **Audit Trail** – Complete visibility into user activity and prediction views
 
 <p align="center">
-  <img width="1908" height="959" alt="image" src="https://github.com/user-attachments/assets/1b6379d6-abcd-42e3-a84a-752fda638817" />
+  <img width="1910" height="980" alt="image" src="https://github.com/user-attachments/assets/d50aa44d-1b14-4e39-ae3b-67d8aa4ebb92" />
   <br>
   <em>Administrator dashboard with system metrics and model controls</em>
 </p>
