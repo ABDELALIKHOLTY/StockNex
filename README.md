@@ -85,7 +85,7 @@ Most prediction systems train a single model on thousands of stocks, forcing App
 - **Curated News Feed** – Financial headlines with sentiment correlation
 
 <p align="center">
-  <img width="1655" height="870" alt="image" src="https://github.com/user-attachments/assets/c9b88684-7157-4ad9-be28-8ea18c464be5" />
+  <img width="1907" height="980" alt="image" src="https://github.com/user-attachments/assets/5cae4e2b-cb55-463b-9269-d47f48c37df2" />
   <br>
   <em>Complete market overview with indices, heatmap, and news</em>
 </p>
