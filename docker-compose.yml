@@ -7,7 +7,8 @@ services:
     ports:
       - 3000:3000
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:4000
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://stocknex-backend:4000
     depends_on:
       - backend
 
@@ -27,16 +28,21 @@ services:
         condition: service_healthy
 
   prediction-api:
-    container_name: prediction-api
+    # REMOVED: container_name (Required for replicas to work)
     build:
       context: ./stock-prediction-api
       dockerfile: Dockerfile
+    # Overriding Dockerfile CMD to add 2 workers
+    command: ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]
     ports:
-      - 8000:8000
+      - "8000-8001:8000" # Maps host 8000 to Cont 1 and host 8001 to Cont 2
     environment:
       - PYTHONUNBUFFERED=1
     volumes:
+      # Absolute path or named volume is safer for replicas
       - ./stock-prediction-api/storage/models:/stock-prediction-api/storage/models
+    deploy:
+      replicas: 2
     depends_on:
       - db
 
