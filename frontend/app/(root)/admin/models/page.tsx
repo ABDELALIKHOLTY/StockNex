@@ -242,11 +242,11 @@ function ModelsPageContent() {
       setCompanyToDelete('');
       setIsDeleting(false);
 
-      setTrainingMessage(`✅ Models for ${companyToDelete} deleted`);
+      setTrainingMessage(`✅ Model for ${companyToDelete} deleted`);
       addAlert({
         type: 'success',
-        title: 'Models Deleted',
-        message: `All models for ${companyToDelete} have been deleted successfully`,
+        title: 'Model Deleted',
+        message: `Model for ${companyToDelete} has been deleted successfully`,
       });
 
       // Recharger les modèles après un délai court
@@ -589,10 +589,10 @@ function ModelsPageContent() {
         <DialogContent className="bg-slate-800 border-slate-700">
           <DialogHeader>
             <DialogTitle className="text-xl font-bold text-red-400">
-              ⚠️ Delete Models
+              ⚠️ Delete Model
             </DialogTitle>
             <DialogDescription className="text-gray-300 mt-2">
-              Are you sure you want to delete all models for <span className="font-semibold text-white">{companyToDelete}</span>? 
+              Are you sure you want to delete the model for <span className="font-semibold text-white">{companyToDelete}</span>? 
               <br />
               <span className="text-sm text-red-300 mt-2 block">
                 This action cannot be undone.
@@ -621,7 +621,7 @@ function ModelsPageContent() {
                   Deleting...
                 </>
               ) : (
-                '🗑️ Delete All Models'
+                '🗑️ Delete the model'
               )}
             </button>
           </DialogFooter>
