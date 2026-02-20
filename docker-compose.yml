@@ -32,8 +32,6 @@ services:
     build:
       context: ./stock-prediction-api
       dockerfile: Dockerfile
-    # Overriding Dockerfile CMD to add 2 workers
-    command: ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]
     ports:
       - "8000-8001:8000" # Maps host 8000 to Cont 1 and host 8001 to Cont 2
     environment:
