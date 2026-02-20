@@ -10,7 +10,7 @@ def save_model_package(company, model, scaler, best_params, training_history, lo
     
     Args:
         model: Trained Keras model
-        scaler: Fitted MinMaxScaler
+        scaler: Fitted StandardScaler
         best_params: Dictionary of best hyperparameters
         training_history: Training history from model.fit()
         company: Stock ticker (used as primary identifier)
