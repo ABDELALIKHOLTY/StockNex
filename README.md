@@ -154,7 +154,7 @@ The LSTM models, while sophisticated, are **not financial advisors**. Stock mark
 
 ```bash
 # 1. Clone and launch
-git clone https://github.com/yourusername/stocknex.git
+git clone https://github.com/ABDELALIKHOLTY/stocknex.git
 cd stocknex
 docker-compose up -d
 
